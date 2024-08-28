@@ -1,8 +1,10 @@
+import 'package:animations/animations.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
-import 'package:ieee_isims_sb/Pages/Splash%20&%20Onbording/SplashScreen.dart';
+import 'package:ieee_isims_sb/Pages/Sign%20In/Sign%20In.dart';
+import 'package:ieee_isims_sb/Pages/Splash%20&%20Onbording/Components/PrimaryBoutton.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 
@@ -15,7 +17,7 @@ class Onbording extends StatefulWidget {
 
 int currentIndex = 0;
 bool islastPage = false;
-PageController _pageController = PageController();
+PageController pageController = PageController();
 List<PageItem> item = [
   PageItem(
     ImagePic: "assets/onBordingImages/ieee_logo.png",
@@ -37,154 +39,160 @@ List<PageItem> item = [
   ),
 ];
 
-class _OnbordingState extends State<Onbording> {
+class _OnbordingState extends State<Onbording>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200),
+    );
+
+    _animation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeIn,
+    );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _animationController.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: white,
-      body: SafeArea(
-          child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: s().p(context, 16), vertical: s().p(context, 24)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text("What is IEEE?", style: Typographie.H4(context)),
-                Spacer(),
+    return FadeTransition(
+      opacity: _animation,
+      child: Scaffold(
+        backgroundColor: white,
+        body: SafeArea(
+            child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: s().p(context, 16), vertical: s().p(context, 24)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text("What is IEEE?", style: Typographie.H4(context)),
+                  Spacer(),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignIn(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "SKIP",
+                        style: TextStyle(
+                            fontSize: s().p(context, 14),
+                            color: const Color(0xff838383),
+                            fontWeight: FontWeight.w500),
+                      )),
+                ],
+              ),
+              Gap(s().p(context, 24)),
+              const Divider(
+                color: Color(0xffBfbfbf),
+                thickness: 2,
+              ),
+              Gap(s().p(context, 24)),
+              Expanded(
+                child: PageView.builder(
+                  onPageChanged: (value) {
+                    setState(() {
+                      currentIndex = value;
+                      islastPage = value + 1 == item.length;
+                    });
+                  },
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        item[index],
+                      ],
+                    );
+                  },
+                  controller: pageController,
+                ),
+              ),
+              Center(
+                child: DotsIndicator(
+                  dotsCount: 4,
+                  position: currentIndex,
+                  decorator: DotsDecorator(
+                    color: const Color(0xffd9d9d9),
+                    activeColor: primary_col,
+                  ),
+                ),
+              ),
+              Gap(s().p(context, 16)),
+              if (islastPage) ...[
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Splashscreen(),
-                        ),
-                        (route) => false);
-                  },
-                  child: Text(
-                    "SKIP",
-                    style: TextStyle(
-                        fontSize: s().p(context, 14),
-                        color: Color(0xff838383),
-                        fontWeight: FontWeight.w500),
-                  ),
-                )
-              ],
-            ),
-            Gap(s().p(context, 24)),
-            Divider(
-              color: Color(0xffBfbfbf),
-              thickness: 2,
-            ),
-            Gap(s().p(context, 24)),
-            Expanded(
-              child: PageView.builder(
-                onPageChanged: (value) {
-                  setState(() {
-                    currentIndex = value;
-                  });
-                  setState(() {
-                    if (value + 1 == item.length) {
-                      islastPage = true;
-                    } else {
-                      setState(() {
-                        islastPage = false;
-                      });
-                    }
-                  });
-                },
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      item[index],
-                    ],
-                  );
-                },
-                controller: _pageController,
-              ),
-            ),
-            Center(
-              child: DotsIndicator(
-                dotsCount: 4,
-                position: currentIndex,
-                decorator: DotsDecorator(
-                  color: Color(0xffd9d9d9), // Inactive color
-                  activeColor: primary_col,
-                ),
-              ),
-            ),
-            Gap(s().p(context, 16)),
-            if (islastPage) ...[
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Splashscreen(),
+                    Navigator.of(context).push(
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            SignIn(),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return SharedAxisTransition(
+                            animation: animation,
+                            secondaryAnimation: secondaryAnimation,
+                            transitionType: SharedAxisTransitionType.horizontal,
+                            child: child,
+                          );
+                        },
                       ),
-                      (route) => false);
-                },
-                child: PrimaryBouttom2(
-                  message: "Continue",
+                    );
+                  },
+                  child: PrimaryBouttom(
+                    message: "Continue",
+                  ),
                 ),
-              ),
+              ],
+              if (islastPage == false) ...[
+                GestureDetector(
+                  onTap: () {
+                    pageController.nextPage(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut);
+                  },
+                  child: const PrimaryBouttom(
+                    message: "Next",
+                  ),
+                ),
+              ]
             ],
-            if (islastPage == false) ...[
-              GestureDetector(
-                onTap: () {
-                  _pageController.nextPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInOut);
-                },
-                child: PrimaryBouttom2(
-                  message: "Next",
-                ),
-              ),
-            ]
-          ],
-        ),
-      )),
-    );
-  }
-}
-
-class PrimaryBouttom2 extends StatelessWidget {
-  final String message;
-
-  const PrimaryBouttom2({super.key, required this.message});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-            child: Container(
-          child: Center(
-            child: Text(
-              message,
-              style: TextStyle(
-                  color: white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: s().p(context, 17)),
-            ),
           ),
-          height: s().p(context, 46),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(38), color: primary_col),
-        ))
-      ],
+        )),
+      ),
     );
   }
 }
 
 class PageItem extends StatelessWidget {
+  // ignore: non_constant_identifier_names
   final String Title;
+  // ignore: non_constant_identifier_names
   final String ImagePic;
-  PageItem({
+  const PageItem({
     super.key,
+    // ignore: non_constant_identifier_names
     required this.ImagePic,
+    // ignore: non_constant_identifier_names
     required this.Title,
   });
 

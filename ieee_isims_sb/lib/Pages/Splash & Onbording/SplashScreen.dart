@@ -18,7 +18,7 @@ class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
     Timer(
-      Duration(seconds: 5),
+       Duration(seconds: 4),
       () {
         Navigator.push(
             context,

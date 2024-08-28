@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
-import 'package:ieee_isims_sb/Pages/Splash%20&%20Onbording/Components/BottomContainer.dart';
+import 'package:ieee_isims_sb/Pages/Splash%20&%20Onbording/Components/PrimaryBoutton.dart';
 import 'package:ieee_isims_sb/Pages/Splash%20&%20Onbording/OnBording.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
+import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
+import 'package:page_transition/page_transition.dart';
 
 class GetStarted extends StatefulWidget {
   GetStarted({super.key});
@@ -20,6 +22,10 @@ class _GetStartedState extends State<GetStarted> {
         child: Scaffold(
           resizeToAvoidBottomInset: true,
           body: Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage("assets/images/BackgroundImage.png"))),
             child: SafeArea(
               child: Column(
                 children: [
@@ -41,18 +47,42 @@ class _GetStartedState extends State<GetStarted> {
                       ),
                     ],
                   ),
-                  Spacer(),
-                  bottomContainer(
-                    mess: "Get Started",
-                    NextWidgetPB: Onbording(),
+                  const Spacer(),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: white,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(40),
+                                  topRight: Radius.circular(40))),
+                          child: Padding(
+                            padding: EdgeInsets.all(s().p(context, 30)),
+                            child: Column(
+                              children: [
+                                GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          PageTransition(
+                                              type: PageTransitionType.fade,
+                                              child: Onbording()));
+                                      ;
+                                    },
+                                    child: PrimaryBouttom(
+                                      message: "Get Started",
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),
             ),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage("assets/images/BackgroundImage.png"))),
           ),
         ));
   }
