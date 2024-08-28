@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
 import 'package:ieee_isims_sb/Pages/Splash%20&%20Onbording/SplashScreen.dart';
+import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-      enabled: false,
+      enabled: true,
       builder: (context) => MaterialApp(
         useInheritedMediaQuery: true,
         theme: ThemeData(
@@ -28,11 +29,11 @@ class MyApp extends StatelessWidget {
                 selectionColor: const Color.fromARGB(255, 144, 161, 205)),
             inputDecorationTheme: InputDecorationTheme(
                 enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(s().p(context, 12)),
                     borderSide:
                         const BorderSide(width: 1.2, color: Color(0xff828282))),
                 focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(s().p(context, 12)),
                     borderSide: BorderSide(color: primary_col, width: 1.2))),
             primaryColor: Colors.black,
             textTheme: GoogleFonts.poppinsTextTheme()),

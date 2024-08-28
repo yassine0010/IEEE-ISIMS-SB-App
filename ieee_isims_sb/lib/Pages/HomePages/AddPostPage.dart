@@ -1,8 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
+import 'package:ieee_isims_sb/utils/ImagePicker.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:line_icons/line_icon.dart';
 
@@ -12,6 +14,8 @@ class Addpostpage extends StatefulWidget {
   @override
   State<Addpostpage> createState() => _AddpostpageState();
 }
+
+Uint8List? file;
 
 final _formPostkey = GlobalKey<FormState>();
 TextEditingController _dateController = TextEditingController();
@@ -117,6 +121,64 @@ class _AddpostpageState extends State<Addpostpage> {
                           hintText: "Form Link",
                         ),
                       ),
+                      Gap(s().p(context, 20)),
+                      Text(
+                        "Add A photo",
+                        style: Typographie.H5(context).copyWith(color: black),
+                      ),
+                      Gap(s().p(context, 8)),
+                      GestureDetector(
+                        onTap: () async {
+                          Uint8List? myfile = await getImages();
+                          if (myfile != null) {
+                            setState(() {
+                              file = myfile!;
+                            });
+                          }
+                        },
+                        child: file == null
+                            ? Container(
+                                child: Center(
+                                  child: LineIcon.photoVideo(
+                                    size: s().p(context, 40),
+                                  ),
+                                ),
+                                height: 300,
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 1),
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              )
+                            : Container(
+                                height: 300,
+                                decoration: BoxDecoration(
+                                    border: Border.all(width: 1),
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: MemoryImage(file!))),
+                              ),
+                      ),
+                      Gap(s().p(context, 54)),
+                      Row(
+                        children: [
+                          Spacer(),
+                          Expanded(
+                              child: Container(
+                            height: s().p(context, 46),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(s().p(context, 12)),
+                                color: primary_col),
+                            child: Center(
+                              child: Text("Post",
+                                  style: Typographie.ActionBouttom(context)
+                                      .copyWith(color: white)),
+                            ),
+                          ))
+                        ],
+                      )
                     ],
                   ),
                 ),

@@ -49,7 +49,7 @@ class _OnbordingState extends State<Onbording>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 200),
+      duration: Duration(milliseconds: 400),
     );
 
     _animation = CurvedAnimation(

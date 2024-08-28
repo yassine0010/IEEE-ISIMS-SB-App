@@ -22,6 +22,7 @@ dependencies:
   flutter_onboarding_slider: ^1.0.11
   persistent_bottom_nav_bar: ^6.2.1
   url_launcher: ^6.3.0
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
