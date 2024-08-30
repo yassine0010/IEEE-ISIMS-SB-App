@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-      enabled: true,
+      enabled: false,
       builder: (context) => MaterialApp(
         useInheritedMediaQuery: true,
         theme: ThemeData(

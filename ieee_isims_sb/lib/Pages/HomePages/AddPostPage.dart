@@ -1,8 +1,8 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
+import 'package:ieee_isims_sb/Pages/HomePages/Components/Dialog.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
 import 'package:ieee_isims_sb/utils/ImagePicker.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
@@ -165,16 +165,26 @@ class _AddpostpageState extends State<Addpostpage> {
                         children: [
                           Spacer(),
                           Expanded(
-                              child: Container(
-                            height: s().p(context, 46),
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.circular(s().p(context, 12)),
-                                color: primary_col),
-                            child: Center(
-                              child: Text("Post",
-                                  style: Typographie.ActionBouttom(context)
-                                      .copyWith(color: white)),
+                              child: GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return popup();
+                                },
+                              );
+                            },
+                            child: Container(
+                              height: s().p(context, 46),
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.circular(s().p(context, 12)),
+                                  color: primary_col),
+                              child: Center(
+                                child: Text("Post",
+                                    style: Typographie.ActionBouttom(context)
+                                        .copyWith(color: white)),
+                              ),
                             ),
                           ))
                         ],

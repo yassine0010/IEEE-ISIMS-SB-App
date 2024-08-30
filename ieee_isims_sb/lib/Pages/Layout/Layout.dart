@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
-import 'package:ieee_isims_sb/Pages/ArchivePage/ArchivePage.dart';
+import 'package:ieee_isims_sb/Pages/AboutUsPage/AboutUsPage.dart';
+import 'package:ieee_isims_sb/Pages/AboutUsPage/AboutUsSubPage/SB.dart';
 import 'package:ieee_isims_sb/Pages/HomePages/AddPostPage.dart';
 import 'package:ieee_isims_sb/Pages/HomePages/HomePage.dart';
 import 'package:ieee_isims_sb/Pages/ProfilePage/ProfilePage.dart';
@@ -72,7 +73,7 @@ class _LayoutPageState extends State<LayoutPage> {
   }
 
   List<Widget> _buildScreens() {
-    return [Homepage(), Profilepage(), Archivepage()];
+    return [Homepage(), Profilepage(), AboutUsPage()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -109,6 +110,7 @@ class _LayoutPageState extends State<LayoutPage> {
         ),
         title: "Profile",
         icon: SvgPicture.asset(
+          color: primary_col,
           "assets/svg/menu_icons/li_user.svg",
           height: s().p(context, 24),
           width: s().p(context, 24),
@@ -130,16 +132,19 @@ class _LayoutPageState extends State<LayoutPage> {
         ),
         title: "About Us",
         icon: SvgPicture.asset(
+          color: primary_col,
           "assets/svg/menu_icons/li_about.svg",
           height: s().p(context, 24),
           width: s().p(context, 24),
         ),
-        scrollController: _scrollController1,
+        scrollController: _scrollController3,
         activeColorPrimary: primary_col,
         inactiveColorPrimary: black,
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
           initialRoute: "/",
-          routes: {},
+          routes: {
+            "/SB": (final context) => SB(),
+          },
         ),
       ),
     ];
