@@ -1,51 +1,21 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:line_icons/line_icon.dart';
 
-class SB extends StatefulWidget {
-  const SB({super.key});
+class SMC extends StatefulWidget {
+  const SMC({super.key});
 
   @override
-  State<SB> createState() => _SBState();
+  State<SMC> createState() => _SMCState();
 }
 
-List<String> WDates = [
-  "December  2023",
-  "December  2023",
-  "February 2024",
-  "Juillet 2024"
-];
-List<String> EDates = [
-  "Octobre 2023",
-  "February 2024",
-];
-List<String> Workshops = [
-  "Pitch Perfect Online Session",
-  "Leadrship session",
-  "Media Bootcamp",
-  "EIPP virtual talk"
-];
-List<String> Events = [
-  "IEEEDAY",
-  "SB 4-th anniversary",
-];
-List<String> WImagePath = [
-  "assets/images/SB/pitch_perfect.jpg",
-  "assets/images/SB/leadership.jpg",
-  "assets/images/SB/bootcamp.jpg",
-  "assets/images/SB/EIPP.jpg",
-];
-List<String> EImagePath = [
-  "assets/images/SB/ieeeday.jpg",
-  "assets/images/SB/anniv.jpg",
-];
-
-class _SBState extends State<SB> {
+class _SMCState extends State<SMC> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,72 +38,23 @@ class _SBState extends State<SB> {
                       Gap(s().p(context, 16)),
                       Expanded(
                         child: Text(
-                          "IEEE ISIMS Student Branch",
+                          "IEEE Systems Man Cybernetics Society",
                           style: Typographie.miniTitle(context)
-                              .copyWith(color: primary_col),
+                              .copyWith(color: smc2_color),
                         ),
                       ),
                     ],
                   ),
                   Gap(s().p(context, 32)),
                   Text(
-                    "IEEE ISIMS Student Branch was established on November 2019 and has more than 90 members. Our Student Branch offers its members numerous educational, technical and professional advantages through different projects, workshops and events.",
+                    "The IEEE SMC Society focuses on advancing knowledge in Systems, Man, and Cybernetics through a variety of technical activities. It supports research and development in areas like artificial intelligence, robotics, and human-machine interaction.",
                     style: Typographie.NormalText(context),
                   ),
-                  Gap(s().p(context, 24)),
-                  Text(
-                    "Workshops",
-                    style: Typographie.miniTitle(context)
-                        .copyWith(color: primary_col),
-                  ),
-                  Gap(s().p(context, 8)),
-                  SizedBox(
-                    height: s().p(context, 200),
-                    child: ListView.builder(
-                      itemCount: 4,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            EventElement(
-                              Dates: WDates,
-                              Event: Workshops,
-                              Path: WImagePath,
-                              index: index,
-                            ),
-                            Gap(s().p(context, 16))
-                          ],
-                        );
-                      },
-                    ),
-                  ),
                   Gap(s().p(context, 32)),
-                  Text(
-                    "Events",
-                    style: Typographie.miniTitle(context)
-                        .copyWith(color: primary_col),
-                  ),
-                  Gap(s().p(context, 8)),
-                  SizedBox(
-                    height: s().p(context, 210),
-                    child: ListView.builder(
-                      itemCount: 2,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            EventElement(
-                              Dates: EDates,
-                              Event: Events,
-                              Path: EImagePath,
-                              index: index,
-                            ),
-                            Gap(s().p(context, 16))
-                          ],
-                        );
-                      },
-                    ),
-                  ),
+                  SvgPicture.asset(
+                      width: s().p(context, 357),
+                      height: s().p(context, 238),
+                      "assets/svg/Construction-cuate.svg")
                 ],
               ),
             ),

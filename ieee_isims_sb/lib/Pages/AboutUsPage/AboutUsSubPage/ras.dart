@@ -7,45 +7,32 @@ import 'package:ieee_isims_sb/fonts/Typographie.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:line_icons/line_icon.dart';
 
-class SB extends StatefulWidget {
-  const SB({super.key});
+class RAS extends StatefulWidget {
+  const RAS({super.key});
 
   @override
-  State<SB> createState() => _SBState();
+  State<RAS> createState() => _RASState();
 }
 
 List<String> WDates = [
-  "December  2023",
-  "December  2023",
+  "November 2023",
+  "January  2024",
   "February 2024",
-  "Juillet 2024"
-];
-List<String> EDates = [
-  "Octobre 2023",
-  "February 2024",
-];
-List<String> Workshops = [
-  "Pitch Perfect Online Session",
-  "Leadrship session",
-  "Media Bootcamp",
-  "EIPP virtual talk"
-];
-List<String> Events = [
-  "IEEEDAY",
-  "SB 4-th anniversary",
-];
-List<String> WImagePath = [
-  "assets/images/SB/pitch_perfect.jpg",
-  "assets/images/SB/leadership.jpg",
-  "assets/images/SB/bootcamp.jpg",
-  "assets/images/SB/EIPP.jpg",
-];
-List<String> EImagePath = [
-  "assets/images/SB/ieeeday.jpg",
-  "assets/images/SB/anniv.jpg",
 ];
 
-class _SBState extends State<SB> {
+List<String> Workshops = [
+  "Robotic  initiation",
+  "All-Terrain Robots Workshop",
+  "Line Follower Robots workshop",
+];
+
+List<String> WImagePath = [
+  "assets/images/ras/robotic.jpg",
+  "assets/images/ras/terrain.jpg",
+  "assets/images/ras/line.jpg",
+];
+
+class _RASState extends State<RAS> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,29 +55,29 @@ class _SBState extends State<SB> {
                       Gap(s().p(context, 16)),
                       Expanded(
                         child: Text(
-                          "IEEE ISIMS Student Branch",
+                          "IEEE Robotics and Automation Society Chapter",
                           style: Typographie.miniTitle(context)
-                              .copyWith(color: primary_col),
+                              .copyWith(color: ras_color),
                         ),
                       ),
                     ],
                   ),
                   Gap(s().p(context, 32)),
                   Text(
-                    "IEEE ISIMS Student Branch was established on November 2019 and has more than 90 members. Our Student Branch offers its members numerous educational, technical and professional advantages through different projects, workshops and events.",
+                    "IEEE Robotics and Automation Society (RAS) aims to advance the development and application of robotics and automation through research, publications, and conferences.",
                     style: Typographie.NormalText(context),
                   ),
                   Gap(s().p(context, 24)),
                   Text(
                     "Workshops",
                     style: Typographie.miniTitle(context)
-                        .copyWith(color: primary_col),
+                        .copyWith(color: ras_color),
                   ),
                   Gap(s().p(context, 8)),
                   SizedBox(
-                    height: s().p(context, 200),
+                    height: s().p(context, 210),
                     child: ListView.builder(
-                      itemCount: 4,
+                      itemCount: 3,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Row(
@@ -99,33 +86,6 @@ class _SBState extends State<SB> {
                               Dates: WDates,
                               Event: Workshops,
                               Path: WImagePath,
-                              index: index,
-                            ),
-                            Gap(s().p(context, 16))
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  Gap(s().p(context, 32)),
-                  Text(
-                    "Events",
-                    style: Typographie.miniTitle(context)
-                        .copyWith(color: primary_col),
-                  ),
-                  Gap(s().p(context, 8)),
-                  SizedBox(
-                    height: s().p(context, 210),
-                    child: ListView.builder(
-                      itemCount: 2,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            EventElement(
-                              Dates: EDates,
-                              Event: Events,
-                              Path: EImagePath,
                               index: index,
                             ),
                             Gap(s().p(context, 16))

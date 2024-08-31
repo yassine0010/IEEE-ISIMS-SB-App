@@ -6,6 +6,7 @@ import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:page_transition/page_transition.dart';
 
 class AboutUsItem extends StatelessWidget {
+  final Widget destination;
   final String Title;
   final Color color;
   final String path;
@@ -14,6 +15,7 @@ class AboutUsItem extends StatelessWidget {
     required this.Title,
     required this.color,
     required this.path,
+    required this.destination,
   });
 
   @override
@@ -21,7 +23,7 @@ class AboutUsItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(context,
-            PageTransition(type: PageTransitionType.fade, child: SB()));
+            PageTransition(type: PageTransitionType.fade, child: destination));
       }, //  arguments:         PageTransition(type: PageTransitionType.fade, child: SB())
       child: Container(
         height: s().p(context, 131),

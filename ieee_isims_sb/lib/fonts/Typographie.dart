@@ -24,6 +24,10 @@ class Typographie {
     return TextStyle(fontSize: s().p(context, 24), fontWeight: FontWeight.w700);
   }
 
+  static TextStyle miniTitle(BuildContext context) {
+    return TextStyle(fontSize: s().p(context, 20), fontWeight: FontWeight.w700);
+  }
+
   // ignore: non_constant_identifier_names
   static TextStyle H5(BuildContext context) {
     return TextStyle(fontSize: s().p(context, 12), fontWeight: FontWeight.w700);
@@ -49,5 +53,12 @@ class Typographie {
         fontSize: s().p(context, 12),
         fontWeight: FontWeight.w400,
         color: Color(0xff838383));
+  }
+
+  static TextStyle Normal(BuildContext context) {
+    return TextStyle(
+      fontSize: s().p(context, 16),
+      fontWeight: FontWeight.w400,
+    );
   }
 }

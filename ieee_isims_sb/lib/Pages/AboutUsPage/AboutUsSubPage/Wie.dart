@@ -7,45 +7,33 @@ import 'package:ieee_isims_sb/fonts/Typographie.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:line_icons/line_icon.dart';
 
-class SB extends StatefulWidget {
-  const SB({super.key});
+class wie extends StatefulWidget {
+  const wie({super.key});
 
   @override
-  State<SB> createState() => _SBState();
+  State<wie> createState() => _wieState();
 }
 
 List<String> WDates = [
-  "December  2023",
-  "December  2023",
   "February 2024",
-  "Juillet 2024"
 ];
 List<String> EDates = [
-  "Octobre 2023",
-  "February 2024",
+  "March 2024",
 ];
 List<String> Workshops = [
-  "Pitch Perfect Online Session",
-  "Leadrship session",
-  "Media Bootcamp",
-  "EIPP virtual talk"
+  "Public Speaking Session",
 ];
 List<String> Events = [
-  "IEEEDAY",
-  "SB 4-th anniversary",
+  "Tech Resolve Challenge",
 ];
 List<String> WImagePath = [
-  "assets/images/SB/pitch_perfect.jpg",
-  "assets/images/SB/leadership.jpg",
-  "assets/images/SB/bootcamp.jpg",
-  "assets/images/SB/EIPP.jpg",
+  "assets/images/Wie/public.jpg",
 ];
 List<String> EImagePath = [
-  "assets/images/SB/ieeeday.jpg",
-  "assets/images/SB/anniv.jpg",
+  "assets/images/cs/trc.jpg",
 ];
 
-class _SBState extends State<SB> {
+class _wieState extends State<wie> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,29 +56,29 @@ class _SBState extends State<SB> {
                       Gap(s().p(context, 16)),
                       Expanded(
                         child: Text(
-                          "IEEE ISIMS Student Branch",
+                          "IEEE Women In Engineering Affinity Group",
                           style: Typographie.miniTitle(context)
-                              .copyWith(color: primary_col),
+                              .copyWith(color: wie_color),
                         ),
                       ),
                     ],
                   ),
                   Gap(s().p(context, 32)),
                   Text(
-                    "IEEE ISIMS Student Branch was established on November 2019 and has more than 90 members. Our Student Branch offers its members numerous educational, technical and professional advantages through different projects, workshops and events.",
+                    "IEEE Women in Engineering is an affinity group within the IEEE dedicated to supporting and empowering women in the engineering and technology fields. It aims to advance women’s participation and leadership in these areas",
                     style: Typographie.NormalText(context),
                   ),
                   Gap(s().p(context, 24)),
                   Text(
                     "Workshops",
                     style: Typographie.miniTitle(context)
-                        .copyWith(color: primary_col),
+                        .copyWith(color: wie_color),
                   ),
                   Gap(s().p(context, 8)),
                   SizedBox(
                     height: s().p(context, 200),
                     child: ListView.builder(
-                      itemCount: 4,
+                      itemCount: 1,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Row(
@@ -111,13 +99,13 @@ class _SBState extends State<SB> {
                   Text(
                     "Events",
                     style: Typographie.miniTitle(context)
-                        .copyWith(color: primary_col),
+                        .copyWith(color: wie_color),
                   ),
                   Gap(s().p(context, 8)),
                   SizedBox(
                     height: s().p(context, 210),
                     child: ListView.builder(
-                      itemCount: 2,
+                      itemCount: 1,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Row(
