@@ -1,7 +1,6 @@
 package dev.IeeeApplication.IeeeApplication.controller;
 
 
-
 import dev.IeeeApplication.IeeeApplication.model.User;
 import dev.IeeeApplication.IeeeApplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

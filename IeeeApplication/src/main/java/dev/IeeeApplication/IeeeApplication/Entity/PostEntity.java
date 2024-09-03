@@ -10,6 +10,7 @@ import java.util.Date;
 @Table(name = "PostEntity")
 public class PostEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Long Id;
 
