@@ -14,4 +14,7 @@ public class PostModel {
     private String PostContent;
     private String FormLink;
     private byte[] Image;
+
+    PostModel() {
+    }
 }

@@ -17,9 +17,11 @@ public class PostEntity {
     @Column(name = "PostOwner")
     private String PostOwner;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "PostDate")
     private Date PostDate;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "PostDeadline")
     private Date PostDeadline;
 
@@ -35,5 +37,11 @@ public class PostEntity {
     @Lob
     @Column(name = "Image")
     private byte[] Image;
+
+    @PrePersist
+    protected void onCreate() {
+        this.PostDate = new Date();
+
+    }
 }
 

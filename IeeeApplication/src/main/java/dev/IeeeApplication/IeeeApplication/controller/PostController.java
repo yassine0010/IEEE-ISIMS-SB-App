@@ -26,6 +26,10 @@ public class PostController {
         List<PostEntity> posts = postRepository.findAll();
         return ResponseEntity.ok(posts);
     }
+    /*@PutMapping("/update/{id}")
+    private ResponseEntity updateMethod(@RequestBody PostEntity postEntity @PathVariable long id) {
+
+    }*/
 
 
 }
