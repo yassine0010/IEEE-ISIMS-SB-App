@@ -28,14 +28,15 @@ public class PostEntity {
     @Column(name = "Title")
     private String Title;
 
-    @Column(name = "PostContent")
+    @Lob
+    @Column(name = "PostContent", columnDefinition = "MEDIUMTEXT")
     private String PostContent;
 
     @Column(name = "FormLink")
     private String FormLink;
 
     @Lob
-    @Column(name = "Image")
+    @Column(name = "Image", columnDefinition = "MEDIUMBlOB")
     private byte[] Image;
 
     @PrePersist

@@ -22,8 +22,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/Post/Posting").hasRole("ADMIN")
-                                .requestMatchers("/Post/ReadAll").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/Post/Posting", "/Update/{requestedId}", "/Delete/{requestedId}").hasRole("ADMIN")
+                                .requestMatchers("/Post/ReadAll", "/User/Read").hasAnyRole("USER", "ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(withDefaults())
