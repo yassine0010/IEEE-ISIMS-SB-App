@@ -19,20 +19,20 @@ int currentIndex = 0;
 bool islastPage = false;
 PageController pageController = PageController();
 List<PageItem> item = [
-  PageItem(
+  const PageItem(
     ImagePic: "assets/onBordingImages/ieee_logo.png",
     Title:
         "1. IEEE, or the Institute of Electrical and Electronics Engineers, is the world's largest technical professional organization",
   ),
-  PageItem(
+  const PageItem(
     ImagePic: "assets/onBordingImages/png1.png",
     Title: "2. IEEE's goal is to help technology grow and make life better.",
   ),
-  PageItem(
+  const PageItem(
     ImagePic: "assets/onBordingImages/png2.png",
     Title: "3. over 400,000 members worldwide",
   ),
-  PageItem(
+  const PageItem(
     ImagePic: "assets/onBordingImages/png3.png",
     Title:
         "4. get access to the latest tech knowledge , important research, and a global network of professionals.",
@@ -49,7 +49,7 @@ class _OnbordingState extends State<Onbording>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 400),
     );
 
     _animation = CurvedAnimation(
@@ -84,13 +84,13 @@ class _OnbordingState extends State<Onbording>
               Row(
                 children: [
                   Text("What is IEEE?", style: Typographie.H4(context)),
-                  Spacer(),
+                  const Spacer(),
                   TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SignIn(),
+                            builder: (context) => const SignIn(),
                           ),
                         );
                       },
@@ -145,7 +145,7 @@ class _OnbordingState extends State<Onbording>
                     Navigator.of(context).push(
                       PageRouteBuilder(
                         pageBuilder: (context, animation, secondaryAnimation) =>
-                            SignIn(),
+                            const SignIn(),
                         transitionsBuilder:
                             (context, animation, secondaryAnimation, child) {
                           return SharedAxisTransition(
@@ -158,7 +158,7 @@ class _OnbordingState extends State<Onbording>
                       ),
                     );
                   },
-                  child: PrimaryBouttom(
+                  child: const PrimaryBouttom(
                     message: "Continue",
                   ),
                 ),

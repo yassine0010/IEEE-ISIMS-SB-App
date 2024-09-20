@@ -12,7 +12,7 @@ import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class LayoutPage extends StatefulWidget {
-  LayoutPage({super.key});
+  const LayoutPage({super.key});
 
   @override
   State<LayoutPage> createState() => _LayoutPageState();
@@ -35,6 +35,15 @@ class _LayoutPageState extends State<LayoutPage> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    _scrollController1.dispose();
+    _scrollController2.dispose();
+    _scrollController3.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PopScope(
         canPop: false,
@@ -43,12 +52,14 @@ class _LayoutPageState extends State<LayoutPage> {
           controller: _controller,
           screens: _buildScreens(),
           items: _navBarsItems(),
-          handleAndroidBackButtonPress: true, // Default is true.
+
+          handleAndroidBackButtonPress: true,
+          // Default is true.
           resizeToAvoidBottomInset:
               false, // This needs to be true if you want to move up the screen on a non-scrollable screen when keyboard appears. Default is true.
           stateManagement: true, // Default is true.
           hideNavigationBarWhenKeyboardAppears: true,
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           isVisible: true,
           animationSettings: const NavBarAnimationSettings(
@@ -73,7 +84,7 @@ class _LayoutPageState extends State<LayoutPage> {
   }
 
   List<Widget> _buildScreens() {
-    return [Homepage(), Profilepage(), AboutUsPage()];
+    return [const Homepage(), const Profilepage(), const AboutUsPage()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -85,7 +96,6 @@ class _LayoutPageState extends State<LayoutPage> {
           "assets/svg/menu_icons/li_home.svg",
           color: black,
         ),
-        title: "Home",
         icon: SvgPicture.asset(
           "assets/svg/menu_icons/li_home.svg",
           height: s().p(context, 24),
@@ -97,7 +107,7 @@ class _LayoutPageState extends State<LayoutPage> {
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
           initialRoute: "/",
           routes: {
-            "/AddPage": (final context) => Addpostpage(),
+            "/AddPage": (final context) => const Addpostpage(),
           },
         ),
       ),
@@ -108,7 +118,6 @@ class _LayoutPageState extends State<LayoutPage> {
           "assets/svg/menu_icons/li_user.svg",
           color: black,
         ),
-        title: "Profile",
         icon: SvgPicture.asset(
           color: primary_col,
           "assets/svg/menu_icons/li_user.svg",
@@ -118,7 +127,7 @@ class _LayoutPageState extends State<LayoutPage> {
         scrollController: _scrollController2,
         activeColorPrimary: primary_col,
         inactiveColorPrimary: black,
-        routeAndNavigatorSettings: RouteAndNavigatorSettings(
+        routeAndNavigatorSettings: const RouteAndNavigatorSettings(
           initialRoute: "/",
           routes: {},
         ),
@@ -130,7 +139,6 @@ class _LayoutPageState extends State<LayoutPage> {
           "assets/svg/menu_icons/li_about.svg",
           color: black,
         ),
-        title: "About Us",
         icon: SvgPicture.asset(
           color: primary_col,
           "assets/svg/menu_icons/li_about.svg",
@@ -143,7 +151,7 @@ class _LayoutPageState extends State<LayoutPage> {
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
           initialRoute: "/",
           routes: {
-            "/SB": (final context) => SB(),
+            "/SB": (final context) => const SB(),
           },
         ),
       ),

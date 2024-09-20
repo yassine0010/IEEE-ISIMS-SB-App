@@ -64,7 +64,7 @@ class _SBState extends State<SB> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: LineIcon.arrowLeft()),
+                          child: const LineIcon.arrowLeft()),
                       Gap(s().p(context, 16)),
                       Expanded(
                         child: Text(
@@ -175,6 +175,13 @@ class EventElement extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(s().p(context, 10)),
+                        bottomLeft: Radius.circular(s().p(context, 10))),
+                    color: const Color.fromARGB(159, 0, 0, 0),
+                  ),
+                  height: s().p(context, 33),
                   child: ClipRRect(
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
@@ -187,14 +194,7 @@ class EventElement extends StatelessWidget {
                             fontWeight: FontWeight.w700),
                       )),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(s().p(context, 10)),
-                        bottomLeft: Radius.circular(s().p(context, 10))),
-                    color: Color.fromARGB(159, 0, 0, 0),
-                  ),
-                  height: s().p(context, 33))
+                  ))
             ],
           ),
         ),

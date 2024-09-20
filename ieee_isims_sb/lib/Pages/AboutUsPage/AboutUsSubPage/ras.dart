@@ -19,7 +19,16 @@ List<String> WDates = [
   "January  2024",
   "February 2024",
 ];
-
+List<String> PDates = [
+  "2023",
+  "2023",
+  "2023",
+];
+List<String> Projects = [
+  "all-terrain robot 1",
+  "all-terrain robot 2",
+  "Line Follower Robots",
+];
 List<String> Workshops = [
   "Robotic  initiation",
   "All-Terrain Robots Workshop",
@@ -30,6 +39,11 @@ List<String> WImagePath = [
   "assets/images/ras/robotic.jpg",
   "assets/images/ras/terrain.jpg",
   "assets/images/ras/line.jpg",
+];
+List<String> PImagePath = [
+  "assets/images/ras/r1.jpg",
+  "assets/images/ras/r2.jpg",
+  "assets/images/ras/r3.jpg",
 ];
 
 class _RASState extends State<RAS> {
@@ -51,7 +65,7 @@ class _RASState extends State<RAS> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: LineIcon.arrowLeft()),
+                          child: const LineIcon.arrowLeft()),
                       Gap(s().p(context, 16)),
                       Expanded(
                         child: Text(
@@ -86,6 +100,31 @@ class _RASState extends State<RAS> {
                               Dates: WDates,
                               Event: Workshops,
                               Path: WImagePath,
+                              index: index,
+                            ),
+                            Gap(s().p(context, 16))
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  Text(
+                    "Projects",
+                    style: Typographie.miniTitle(context)
+                        .copyWith(color: ras_color),
+                  ),
+                  SizedBox(
+                    height: s().p(context, 210),
+                    child: ListView.builder(
+                      itemCount: 3,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            EventElement(
+                              Dates: PDates,
+                              Event: Projects,
+                              Path: PImagePath,
                               index: index,
                             ),
                             Gap(s().p(context, 16))
@@ -135,6 +174,13 @@ class EventElement extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(s().p(context, 10)),
+                        bottomLeft: Radius.circular(s().p(context, 10))),
+                    color: const Color.fromARGB(159, 0, 0, 0),
+                  ),
+                  height: s().p(context, 33),
                   child: ClipRRect(
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
@@ -147,14 +193,7 @@ class EventElement extends StatelessWidget {
                             fontWeight: FontWeight.w700),
                       )),
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(s().p(context, 10)),
-                        bottomLeft: Radius.circular(s().p(context, 10))),
-                    color: Color.fromARGB(159, 0, 0, 0),
-                  ),
-                  height: s().p(context, 33))
+                  ))
             ],
           ),
         ),

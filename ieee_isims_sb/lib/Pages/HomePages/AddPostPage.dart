@@ -22,15 +22,15 @@ TextEditingController _dateController = TextEditingController();
 
 class _AddpostpageState extends State<Addpostpage> {
   Future<void> _selectDate() async {
-    DateTime? _picked = await showDatePicker(
+    DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(Duration(days: 200)));
+        lastDate: DateTime.now().add(const Duration(days: 200)));
 
-    if (_picked != null) {
+    if (picked != null) {
       setState(() {
-        _dateController.text = _picked.toString().split(" ")[0];
+        _dateController.text = picked.toString().split(" ")[0];
       });
     }
   }
@@ -51,7 +51,7 @@ class _AddpostpageState extends State<Addpostpage> {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: LineIcon.arrowLeft()),
+                    child: const LineIcon.arrowLeft()),
                 Gap(s().p(context, 27)),
                 Form(
                   key: _formPostkey,
@@ -63,10 +63,12 @@ class _AddpostpageState extends State<Addpostpage> {
                               Typographie.H5(context).copyWith(color: black)),
                       Gap(s().p(context, 8)),
                       TextFormField(
-                        validator: (value) {},
+                        validator: (value) {
+                          return null;
+                        },
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: Color.fromARGB(255, 255, 255, 255),
+                          fillColor: const Color.fromARGB(255, 255, 255, 255),
                           hintStyle: Typographie.Placeholder(context),
                           hintText: "Enter Your Title",
                         ),
@@ -82,11 +84,13 @@ class _AddpostpageState extends State<Addpostpage> {
                         onTap: () {
                           _selectDate();
                         },
-                        validator: (value) {},
+                        validator: (value) {
+                          return null;
+                        },
                         decoration: InputDecoration(
-                          suffixIcon: Icon(Icons.calendar_today),
+                          suffixIcon: const Icon(Icons.calendar_today),
                           filled: true,
-                          fillColor: Color.fromARGB(255, 255, 255, 255),
+                          fillColor: const Color.fromARGB(255, 255, 255, 255),
                           hintStyle: Typographie.Placeholder(context),
                           hintText: "Enter Deadline",
                         ),
@@ -99,10 +103,12 @@ class _AddpostpageState extends State<Addpostpage> {
                       TextFormField(
                         maxLines: 6,
                         keyboardType: TextInputType.multiline,
-                        validator: (value) {},
+                        validator: (value) {
+                          return null;
+                        },
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: Color.fromARGB(255, 255, 255, 255),
+                          fillColor: const Color.fromARGB(255, 255, 255, 255),
                           hintStyle: Typographie.Placeholder(context),
                           hintText: "Enter Your Body",
                         ),
@@ -113,10 +119,12 @@ class _AddpostpageState extends State<Addpostpage> {
                               Typographie.H5(context).copyWith(color: black)),
                       Gap(s().p(context, 8)),
                       TextFormField(
-                        validator: (value) {},
+                        validator: (value) {
+                          return null;
+                        },
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: Color.fromARGB(255, 255, 255, 255),
+                          fillColor: const Color.fromARGB(255, 255, 255, 255),
                           hintStyle: Typographie.Placeholder(context),
                           hintText: "Form Link",
                         ),
@@ -132,23 +140,23 @@ class _AddpostpageState extends State<Addpostpage> {
                           Uint8List? myfile = await getImages();
                           if (myfile != null) {
                             setState(() {
-                              file = myfile!;
+                              file = myfile;
                             });
                           }
                         },
                         child: file == null
                             ? Container(
-                                child: Center(
-                                  child: LineIcon.photoVideo(
-                                    size: s().p(context, 40),
-                                  ),
-                                ),
                                 height: 300,
                                 decoration: BoxDecoration(
                                   border: Border.all(width: 1),
                                   color:
                                       const Color.fromARGB(255, 255, 255, 255),
                                   borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Center(
+                                  child: LineIcon.photoVideo(
+                                    size: s().p(context, 40),
+                                  ),
                                 ),
                               )
                             : Container(
@@ -163,14 +171,14 @@ class _AddpostpageState extends State<Addpostpage> {
                       Gap(s().p(context, 54)),
                       Row(
                         children: [
-                          Spacer(),
+                          const Spacer(),
                           Expanded(
                               child: GestureDetector(
                             onTap: () {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return popup();
+                                  return const popup();
                                 },
                               );
                             },

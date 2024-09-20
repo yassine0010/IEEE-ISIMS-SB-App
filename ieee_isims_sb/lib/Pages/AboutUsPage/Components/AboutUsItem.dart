@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ieee_isims_sb/Colors/colors.dart';
 import 'package:ieee_isims_sb/Pages/AboutUsPage/AboutUsSubPage/SB.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
@@ -10,7 +11,7 @@ class AboutUsItem extends StatelessWidget {
   final String Title;
   final Color color;
   final String path;
-  AboutUsItem({
+  const AboutUsItem({
     super.key,
     required this.Title,
     required this.color,
@@ -28,7 +29,14 @@ class AboutUsItem extends StatelessWidget {
       child: Container(
         height: s().p(context, 131),
         decoration: BoxDecoration(
-            color: Color(0xffFFFFFF),
+            boxShadow: [
+              BoxShadow(
+                  color: Color.fromARGB(110, 109, 109, 109),
+                  spreadRadius: 1,
+                  offset: Offset(3, 3),
+                  blurRadius: 3)
+            ],
+            color: const Color(0xffFFFFFF),
             borderRadius: BorderRadius.circular(s().p(context, 12))),
         child: Padding(
           padding: EdgeInsets.all(s().p(context, 16)),
@@ -41,7 +49,7 @@ class AboutUsItem extends StatelessWidget {
                     style: Typographie.H5(context).copyWith(color: color),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Title == "IEEE Women In Engineering Affinity Group"
                     ? Image.asset(
                         path,

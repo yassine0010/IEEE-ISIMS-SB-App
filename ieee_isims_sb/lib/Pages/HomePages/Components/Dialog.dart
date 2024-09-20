@@ -13,8 +13,8 @@ class popup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      insetPadding: EdgeInsets.all(0),
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      insetPadding: const EdgeInsets.all(0),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusDirectional.circular(s().p(context, 8))),
       children: [
@@ -30,13 +30,13 @@ class popup extends StatelessWidget {
                   children: [
                     Text("Sure You Want To Uplod This Post?",
                         style: Typographie.H5(context)
-                            .copyWith(color: Color(0xff54595E))),
+                            .copyWith(color: const Color(0xff54595E))),
                   ],
                 ),
                 Gap(s().p(context, 16)),
                 Row(
                   children: [
-                    Spacer(),
+                    const Spacer(),
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
@@ -69,7 +69,7 @@ class popup extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Homepage()));
+                                builder: (context) => const Homepage()));
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
@@ -85,7 +85,7 @@ class popup extends StatelessWidget {
                                     .copyWith(color: white))),
                       ),
                     ),
-                    Spacer()
+                    const Spacer()
                   ],
                 ),
               ],

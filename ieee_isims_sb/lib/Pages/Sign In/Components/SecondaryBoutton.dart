@@ -5,7 +5,7 @@ import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 
 class SecondaryBoutton extends StatefulWidget {
   final String message;
-  SecondaryBoutton({super.key, required this.message});
+  const SecondaryBoutton({super.key, required this.message});
 
   @override
   State<SecondaryBoutton> createState() => _SecondaryBouttonState();

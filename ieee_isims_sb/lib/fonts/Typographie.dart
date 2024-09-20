@@ -45,14 +45,14 @@ class Typographie {
     return TextStyle(
         fontSize: s().p(context, 12),
         fontWeight: FontWeight.w500,
-        color: Color(0xff838383));
+        color: const Color(0xff838383));
   }
 
   static TextStyle Body(BuildContext context) {
     return TextStyle(
         fontSize: s().p(context, 12),
         fontWeight: FontWeight.w400,
-        color: Color(0xff838383));
+        color: const Color(0xff838383));
   }
 
   static TextStyle Normal(BuildContext context) {

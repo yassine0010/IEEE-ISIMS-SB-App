@@ -8,7 +8,7 @@ import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:page_transition/page_transition.dart';
 
 class GetStarted extends StatefulWidget {
-  GetStarted({super.key});
+  const GetStarted({super.key});
 
   @override
   State<GetStarted> createState() => _GetStartedState();
@@ -54,7 +54,7 @@ class _GetStartedState extends State<GetStarted> {
                         child: Container(
                           decoration: BoxDecoration(
                               color: white,
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(40),
                                   topRight: Radius.circular(40))),
                           child: Padding(
@@ -67,10 +67,9 @@ class _GetStartedState extends State<GetStarted> {
                                           context,
                                           PageTransition(
                                               type: PageTransitionType.fade,
-                                              child: Onbording()));
-                                      ;
+                                              child: const Onbording()));
                                     },
-                                    child: PrimaryBouttom(
+                                    child: const PrimaryBouttom(
                                       message: "Get Started",
                                     )),
                               ],
