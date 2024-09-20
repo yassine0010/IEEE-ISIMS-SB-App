@@ -36,7 +36,8 @@ class Post {
         postOwner: json["postOwner"],
         postContent: json["postContent"],
         formLink: json["formLink"],
-        image: base64Decode(json["image"]),
+        image:
+            json["image"] != null ? base64Decode(json["image"]) : Uint8List(0),
         postDate: DateTime.parse(json["postDate"]),
         postDeadline: json["postDeadline"],
       );

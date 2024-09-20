@@ -13,6 +13,7 @@ Future<List<Post>?> ReadAllPosts() async {
     final response =
         await http.get(url, headers: {"Authorization": 'Basic $loginValues'});
     if (response.statusCode == 200) {
+      print("good");
       final List<dynamic> jsonResponse = jsonDecode(response.body);
       final List<Post> postList =
           jsonResponse.map((data) => Post.fromJson(data)).toList();

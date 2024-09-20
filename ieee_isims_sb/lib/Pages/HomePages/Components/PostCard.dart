@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
 import 'package:ieee_isims_sb/models/PostModel.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:line_icons/line_icon.dart';
+import 'package:date_time_format/date_time_format.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PostCard extends StatelessWidget {
   final String role;
@@ -15,6 +16,10 @@ class PostCard extends StatelessWidget {
     required this.role,
     required this.post,
   });
+  void _launchURL() async {
+    String url = await post.formLink;
+    await launch(url);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,17 +54,19 @@ class PostCard extends StatelessWidget {
                               style: Typographie.H5(context)
                                   .copyWith(color: primary_col),
                             ),
-                            Text(
-                              post.postDate.toString(),
-                              style: TextStyle(
-                                  color: black,
-                                  fontSize: s().p(context, 8),
-                                  fontWeight: FontWeight.w400),
-                            ),
+                            if (post.postDate != null) ...[
+                              Text(
+                                post.postDate.format('D, M j, H:i'),
+                                style: TextStyle(
+                                    color: black,
+                                    fontSize: s().p(context, 8),
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
                             Gap(s().p(context, 2)),
                             if (post.postDeadline != null) ...[
                               Text(
-                                post.postDeadline!,
+                                post.postDeadline,
                                 style: TextStyle(
                                     color: smc_color,
                                     fontSize: s().p(context, 8),
@@ -94,32 +101,40 @@ class PostCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            post.formLink,
+                            "Link: ",
                             style: Typographie.Placeholder(context)
                                 .copyWith(color: const Color(0xff3184D9)),
                           ),
                           Expanded(
-                            child: Text(
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              post.formLink,
-                              style: TextStyle(
-                                  color: smc2_color,
-                                  fontSize: s().p(context, 10),
-                                  decoration: TextDecoration.underline),
+                            child: GestureDetector(
+                              onTap: () {
+                                _launchURL();
+                              },
+                              child: Text(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                post.formLink,
+                                style: TextStyle(
+                                    color: smc2_color,
+                                    fontSize: s().p(context, 10),
+                                    decoration: TextDecoration.underline),
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ],
                     Gap(s().p(context, 9)),
-                    Container(
-                      height: 250,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: MemoryImage(post.image))),
-                    )
+
+                    if (post.image.isNotEmpty) ...[
+                      Container(
+                        height: 250,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: MemoryImage(post.image))),
+                      )
+                    ]
                   ],
                 )),
           ),

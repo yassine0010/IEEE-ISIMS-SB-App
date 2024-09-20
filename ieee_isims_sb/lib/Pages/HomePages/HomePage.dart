@@ -62,100 +62,119 @@ class _HomepageState extends State<Homepage> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : SafeArea(
-              child: CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: Padding(
-                        padding: EdgeInsets.all(
-                          s().p(context, 16),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Welcome To IEEE ISIMS SB App ! ",
-                              style: Typographie.H3(context)
-                                  .copyWith(color: primary_col),
-                            ),
-                            Gap(s().p(context, 16)),
-                            Text(
-                              "Great Stories Begin Here !",
-                              style: Typographie.Placeholder(context),
-                            ),
-                            Gap(s().p(context, 16)),
-                            Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    _launchFacebookURL();
-                                  },
-                                  child: SvgPicture.asset(
-                                    "assets/SocialMedia/facebook.svg",
-                                    width: s().p(context, 36),
-                                    height: s().p(context, 36),
-                                  ),
-                                ),
-                                Gap(s().p(context, 27)),
-                                GestureDetector(
-                                  onTap: () {
-                                    _launchInstagramURL();
-                                  },
-                                  child: SvgPicture.asset(
-                                    "assets/SocialMedia/Instagram.svg",
-                                    width: s().p(context, 36),
-                                    height: s().p(context, 36),
-                                  ),
-                                ),
-                                Gap(s().p(context, 27)),
-                                GestureDetector(
-                                  onTap: () {
-                                    _launchLinkedinURL();
-                                  },
-                                  child: SvgPicture.asset(
-                                    "assets/SocialMedia/Linkedin.svg",
-                                    width: s().p(context, 36),
-                                    height: s().p(context, 36),
-                                  ),
-                                ),
-                                const Spacer(),
-                                if (UserProfile?.role == "Admin") ...[
+          : RefreshIndicator(
+              color: primary_col,
+              onRefresh: () async {
+                await fetchPosts();
+                setState(() {});
+                // Trigger a rebuild after refreshing
+              },
+              child: SafeArea(
+                child: CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Padding(
+                          padding: EdgeInsets.all(
+                            s().p(context, 16),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Welcome To IEEE ISIMS SB App ! ",
+                                style: Typographie.H3(context)
+                                    .copyWith(color: primary_col),
+                              ),
+                              Gap(s().p(context, 16)),
+                              Text(
+                                "Great Stories Begin Here !",
+                                style: Typographie.Placeholder(context),
+                              ),
+                              Gap(s().p(context, 16)),
+                              Row(
+                                children: [
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.pushNamed(context, '/AddPage');
+                                      _launchFacebookURL();
                                     },
-                                    child: LineIcon.plusCircle(
-                                      color: primary_col,
-                                      size: s().p(context, 36),
+                                    child: SvgPicture.asset(
+                                      "assets/SocialMedia/facebook.svg",
+                                      width: s().p(context, 36),
+                                      height: s().p(context, 36),
                                     ),
-                                  )
-                                ]
-                              ],
-                            ),
-                            Gap(s().p(context, 16)),
-                          ],
-                        )),
-                  ),
-                  FutureBuilder<List<Post>?>(
-                    future: fetchPosts(),
-                    builder: (context, snapshot) {
-                      return SliverList.builder(
-                        itemCount: snapshot.data?.length,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              PostCard(
-                                post: snapshot.data![index],
-                                role: UserProfile!.role,
+                                  ),
+                                  Gap(s().p(context, 27)),
+                                  GestureDetector(
+                                    onTap: () {
+                                      _launchInstagramURL();
+                                    },
+                                    child: SvgPicture.asset(
+                                      "assets/SocialMedia/Instagram.svg",
+                                      width: s().p(context, 36),
+                                      height: s().p(context, 36),
+                                    ),
+                                  ),
+                                  Gap(s().p(context, 27)),
+                                  GestureDetector(
+                                    onTap: () {
+                                      _launchLinkedinURL();
+                                    },
+                                    child: SvgPicture.asset(
+                                      "assets/SocialMedia/Linkedin.svg",
+                                      width: s().p(context, 36),
+                                      height: s().p(context, 36),
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  if (UserProfile?.role == "Admin") ...[
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, '/AddPage');
+                                      },
+                                      child: LineIcon.plusCircle(
+                                        color: primary_col,
+                                        size: s().p(context, 36),
+                                      ),
+                                    )
+                                  ]
+                                ],
                               ),
-                              Gap(s().p(context, 10))
+                              Gap(s().p(context, 16)),
                             ],
+                          )),
+                    ),
+                    FutureBuilder<List<Post>?>(
+                      future: fetchPosts(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          // Show a loading indicator while the future is loading
+                          return SliverToBoxAdapter(
+                            child: Center(child: CircularProgressIndicator()),
                           );
-                        },
-                      );
-                    },
-                  ),
-                ],
+                        } else {
+                          final postList = snapshot.data!.reversed.toList();
+
+                          return SliverList.builder(
+                            itemCount: postList.length,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  PostCard(
+                                    post: postList[index],
+                                    role: UserProfile!.role,
+                                  ),
+                                  Gap(s().p(context, 10))
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
     );
