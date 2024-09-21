@@ -41,7 +41,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isvisitor = prefs.getBool("isvisitor") ?? false;
 
-    if (isvisitor) {
+    if (isvisitor == true) {
       Navigator.pushReplacement(
         context,
         PageTransition(
@@ -54,8 +54,9 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
     }
 
     final isAuthenticated = await login(EmailController, PasswordController);
-
+    print(isAuthenticated);
     if (isAuthenticated) {
+      print("authenticated");
       Navigator.pushReplacement(
         context,
         PageTransition(
@@ -188,7 +189,9 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                                 context,
                                                 PageTransition(
                                                   type: PageTransitionType.fade,
-                                                  child: LayoutPage(),
+                                                  child: LayoutPage(
+                                                    isvisitor: false,
+                                                  ),
                                                 ),
                                               );
                                               ScaffoldMessenger.of(context)

@@ -90,7 +90,7 @@ class _OnbordingState extends State<Onbording>
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const SignIn(),
+                            builder: (context) =>  SignIn(),
                           ),
                         );
                       },
@@ -145,7 +145,7 @@ class _OnbordingState extends State<Onbording>
                     Navigator.of(context).push(
                       PageRouteBuilder(
                         pageBuilder: (context, animation, secondaryAnimation) =>
-                            const SignIn(),
+                             SignIn(),
                         transitionsBuilder:
                             (context, animation, secondaryAnimation, child) {
                           return SharedAxisTransition(

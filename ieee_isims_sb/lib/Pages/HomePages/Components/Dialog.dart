@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
 import 'package:ieee_isims_sb/Pages/HomePages/HomePage.dart';
+import 'package:ieee_isims_sb/Pages/Layout/Layout.dart';
 import 'package:ieee_isims_sb/Services/PostService.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
 import 'package:ieee_isims_sb/models/PostModel.dart';
@@ -29,7 +30,7 @@ class popup extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(s().p(context, 8)),
           child: SizedBox(
-            width: MediaQuery.sizeOf(context).width * 0.8,
+            width: MediaQuery.sizeOf(context).width * 0.85,
             height: s().p(context, 90),
             child: Column(
               children: [
@@ -76,7 +77,7 @@ class popup extends StatelessWidget {
                       onTap: () async {
                         if (PopUpText == "Sure You Want To Update This Post?") {
                           await UpdatePost(id!, post!);
-                           ScaffoldMessenger.of(context).showSnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                                 backgroundColor: Colors.green,
                                 content: Text('Post Succsesfully Updated')),
@@ -102,7 +103,9 @@ class popup extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>  Homepage()));
+                                builder: (context) => LayoutPage(
+                                      isvisitor: false,
+                                    )));
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(

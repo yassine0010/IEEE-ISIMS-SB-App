@@ -29,7 +29,7 @@ class _LayoutPageState extends State<LayoutPage> {
     super.initState();
     int index = 0;
 
-    if (widget.isvisitor != null && widget.isvisitor == true) {
+    if (widget.isvisitor != null && widget.isvisitor==true) {
       index = 2;
     }
     _controller = PersistentTabController(initialIndex: index);
