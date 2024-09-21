@@ -11,10 +11,12 @@ import 'package:ieee_isims_sb/models/ProfileModel.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+  bool? isvisitor;
+  Homepage({super.key, this.isvisitor});
 
   @override
   State<Homepage> createState() => _HomepageState();
@@ -28,6 +30,14 @@ class _HomepageState extends State<Homepage> {
     Provider.of<ProfileProvider>(context, listen: false).getDetails();
     super.initState();
   }
+
+  // Future<bool> userTest() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  //   bool isvisitor = prefs.getBool("isvisitor") ?? false;
+  //   print(isvisitor);
+  //   return isvisitor;
+  // }
 
   void _launchFacebookURL() async {
     const url = 'https://www.facebook.com/IEEEStudentBranchISIMSf';
@@ -144,66 +154,84 @@ class _HomepageState extends State<Homepage> {
                             ],
                           )),
                     ),
-                    FutureBuilder<List<Post>?>(
-                      future: fetchPosts(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return SliverToBoxAdapter(
-                            child: Center(
-                              child: Text("An error occurred"),
-                            ),
-                          );
-                        }
-                        if (ConnectionState.none == snapshot.connectionState) {
-                          print("object");
-                          return SliverToBoxAdapter(
-                            child: Center(
-                              child: Text("Internet Connexion Problem"),
-                            ),
-                          );
-                        }
-
-                        if (snapshot.hasData && snapshot.data!.isEmpty) {
-                          return SliverToBoxAdapter(
-                            child: Center(
-                              child: Text("No posts available"),
-                            ),
-                          );
-                        }
-
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return SliverToBoxAdapter(
-                            child: Center(child: CircularProgressIndicator()),
-                          );
-                        }
-                        if (snapshot.hasData) {
-                          final postList = snapshot.data!.reversed.toList();
-
-                          return SliverList.builder(
-                            itemCount: postList.length,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  PostCard(
-                                    post: postList[index],
-                                    role: UserProfile!.role,
-                                  ),
-                                  Gap(s().p(context, 10))
-                                ],
-                              );
-                            },
-                          );
-                        } else {
-                          print("test");
-                          return SliverToBoxAdapter(
+                    if (widget.isvisitor == false) ...[
+                      FutureBuilder<List<Post>?>(
+                        future: fetchPosts(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return SliverToBoxAdapter(
                               child: Center(
-                                  child: CircularProgressIndicator(
-                            color: primary_col,
-                          )));
-                        }
-                      },
-                    ),
+                                child: Text("An error occurred"),
+                              ),
+                            );
+                          }
+                          if (ConnectionState.none ==
+                              snapshot.connectionState) {
+                            print("object");
+                            return SliverToBoxAdapter(
+                              child: Center(
+                                child: Text("Internet Connexion Problem"),
+                              ),
+                            );
+                          }
+
+                          if (snapshot.hasData && snapshot.data!.isEmpty) {
+                            return SliverToBoxAdapter(
+                              child: Center(
+                                child: Text("No posts available"),
+                              ),
+                            );
+                          }
+
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return SliverToBoxAdapter(
+                              child: Center(child: CircularProgressIndicator()),
+                            );
+                          }
+                          if (snapshot.hasData) {
+                            final postList = snapshot.data!.reversed.toList();
+
+                            return SliverList.builder(
+                              itemCount: postList.length,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    PostCard(
+                                      post: postList[index],
+                                      role: UserProfile!.role,
+                                    ),
+                                    Gap(s().p(context, 10))
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            print("test");
+                            return SliverToBoxAdapter(
+                                child: Center(
+                                    child: CircularProgressIndicator(
+                              color: primary_col,
+                            )));
+                          }
+                        },
+                      ),
+                    ],
+                    if (widget.isvisitor == true) ...[
+                      SliverToBoxAdapter(
+                        child: Column(
+                          children: [
+                            SvgPicture.asset("assets/svg/unauthorized.svg"),
+                            Gap(s().p(context, 16)),
+                            Text(
+                              "IEEE Membership is required",
+                              style: Typographie.H5(context)
+                                  .copyWith(color: primary_col),
+                            )
+                          ],
+                        ),
+                      )
+                    ]
                   ],
                 ),
               ),

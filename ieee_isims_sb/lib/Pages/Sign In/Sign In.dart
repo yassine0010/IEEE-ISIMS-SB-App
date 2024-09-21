@@ -20,10 +20,6 @@ class SignIn extends StatefulWidget {
   State<SignIn> createState() => _SignInState();
 }
 
-Future<void> SaveConnexion() async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-}
-
 bool ischecked = true;
 bool isobsecure = true;
 TextEditingController EmailController = TextEditingController();
@@ -35,12 +31,28 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
     _checkAuthentication();
   }
 
   bool isloading = true;
 
   Future<void> _checkAuthentication() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isvisitor = prefs.getBool("isvisitor") ?? false;
+
+    if (isvisitor) {
+      Navigator.pushReplacement(
+        context,
+        PageTransition(
+          type: PageTransitionType.fade,
+          child: LayoutPage(
+            isvisitor: isvisitor,
+          ),
+        ),
+      );
+    }
+
     final isAuthenticated = await login(EmailController, PasswordController);
 
     if (isAuthenticated) {
@@ -48,7 +60,9 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
         context,
         PageTransition(
           type: PageTransitionType.fade,
-          child: LayoutPage(),
+          child: LayoutPage(
+            isvisitor: false,
+          ),
         ),
       );
     }
@@ -219,12 +233,18 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                       child: SecondaryBoutton(
                                         message: "Continue As A Visitor",
                                       ),
-                                      onTap: () {
+                                      onTap: () async {
+                                        final SharedPreferences prefs =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        prefs.setBool("isvisitor", true);
+
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LayoutPage(),
+                                              builder: (context) => LayoutPage(
+                                                isvisitor: true,
+                                              ),
                                             ));
                                       },
                                     )

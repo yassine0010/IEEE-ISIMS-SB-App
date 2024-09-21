@@ -12,7 +12,8 @@ import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class LayoutPage extends StatefulWidget {
-  const LayoutPage({super.key});
+  final bool? isvisitor;
+  LayoutPage({super.key, this.isvisitor});
 
   @override
   State<LayoutPage> createState() => _LayoutPageState();
@@ -23,11 +24,15 @@ class _LayoutPageState extends State<LayoutPage> {
   late ScrollController _scrollController1;
   late ScrollController _scrollController2;
   late ScrollController _scrollController3;
-
   @override
   void initState() {
     super.initState();
-    _controller = PersistentTabController(initialIndex: 0);
+    int index = 0;
+
+    if (widget.isvisitor != null && widget.isvisitor == true) {
+      index = 2;
+    }
+    _controller = PersistentTabController(initialIndex: index);
     _scrollController1 = ScrollController();
     _scrollController2 = ScrollController();
 
@@ -84,7 +89,15 @@ class _LayoutPageState extends State<LayoutPage> {
   }
 
   List<Widget> _buildScreens() {
-    return [const Homepage(), const Profilepage(), const AboutUsPage()];
+    print("object");
+    print(widget.isvisitor);
+    return [
+      Homepage(
+        isvisitor: widget.isvisitor,
+      ),
+      Profilepage(),
+      AboutUsPage()
+    ];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {

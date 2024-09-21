@@ -12,7 +12,6 @@ import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
@@ -155,6 +154,7 @@ class _ProfilepageState extends State<Profilepage> {
                                 await SharedPreferences.getInstance();
                             prefs.remove("loginValues");
                             prefs.setBool("is_SignIn", false);
+                            prefs.setBool("isvisitor", false);
                             SystemNavigator.pop();
                           },
                           child: Row(

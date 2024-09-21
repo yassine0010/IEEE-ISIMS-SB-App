@@ -35,7 +35,7 @@ List<PageItem> item = [
   const PageItem(
     ImagePic: "assets/onBordingImages/png3.png",
     Title:
-        "4. get access to the latest tech knowledge , important research, and a global network of professionals.",
+        "4. Get access to the latest tech knowledge , important research, and a global network of professionals.",
   ),
 ];
 

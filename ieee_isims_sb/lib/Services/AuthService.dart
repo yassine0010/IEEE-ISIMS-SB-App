@@ -7,7 +7,7 @@ Future<bool> login(
   TextEditingController EmailController,
   TextEditingController PasswordController,
 ) async {
-  final url = await Uri.parse('http://192.168.0.113:8080/User/Read');
+  final url = await Uri.parse('http://192.168.1.18:8080/User/Read');
 
   final String _email = EmailController.text;
   final String _password = PasswordController.text;

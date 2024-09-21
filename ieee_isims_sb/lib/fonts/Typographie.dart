@@ -16,7 +16,7 @@ class Typographie {
 
   // ignore: non_constant_identifier_names
   static TextStyle H3(BuildContext context) {
-    return TextStyle(fontSize: s().p(context, 36), fontWeight: FontWeight.w700);
+    return TextStyle(fontSize: s().p(context, 30), fontWeight: FontWeight.w700);
   }
 
   // ignore: non_constant_identifier_names
