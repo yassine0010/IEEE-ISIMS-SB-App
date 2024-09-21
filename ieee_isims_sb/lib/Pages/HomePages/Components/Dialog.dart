@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
 import 'package:ieee_isims_sb/Pages/HomePages/HomePage.dart';
+import 'package:ieee_isims_sb/Services/PostService.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
+import 'package:ieee_isims_sb/models/PostModel.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 
 class popup extends StatelessWidget {
-  const popup({
+  final Post? post;
+  final int? id;
+  final String PopUpText;
+  popup({
     super.key,
+    this.post,
+    required this.PopUpText,
+    this.id,
   });
 
   @override
@@ -28,7 +36,7 @@ class popup extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Sure You Want To Uplod This Post?",
+                    Text(PopUpText,
                         style: Typographie.H5(context)
                             .copyWith(color: const Color(0xff54595E))),
                   ],
@@ -65,7 +73,32 @@ class popup extends StatelessWidget {
                     ),
                     Gap(s().p(context, 16)),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        if (PopUpText == "Sure You Want To Update This Post?") {
+                          await UpdatePost(id!, post!);
+                           ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                backgroundColor: Colors.green,
+                                content: Text('Post Succsesfully Updated')),
+                          );
+                        } else if (PopUpText ==
+                            "Sure You Want To Delete This Post?") {
+                          await DeletePost(id!);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                backgroundColor: Colors.green,
+                                content: Text('Post Succsesfully Deleted')),
+                          );
+                          Navigator.pop(context);
+                        } else {
+                          await UploadPost(post!);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                backgroundColor: Colors.green,
+                                content: Text(
+                                    'Post Succsesfully Uploaded, please reopen the app (bug)')),
+                          );
+                        }
                         Navigator.push(
                             context,
                             MaterialPageRoute(

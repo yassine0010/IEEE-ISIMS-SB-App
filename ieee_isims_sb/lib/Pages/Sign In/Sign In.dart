@@ -138,7 +138,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                               : const LineIcon.eye()),
                                       hintStyle:
                                           Typographie.Placeholder(context),
-                                      hintText: "Enter Your Password",
+                                      hintText: "Please Enter Your Password",
                                     ),
                                   ),
                                 ],
@@ -164,32 +164,36 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                   children: [
                                     GestureDetector(
                                         onTap: () async {
-                                          final isAuthenticated = await login(
-                                              EmailController,
-                                              PasswordController);
-                                          if (isAuthenticated) {
-                                            Navigator.push(
-                                              context,
-                                              PageTransition(
-                                                type: PageTransitionType.fade,
-                                                child: LayoutPage(),
-                                              ),
-                                            );
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                  backgroundColor: Colors.green,
-                                                  content:
-                                                      Text('Login successful')),
-                                            );
-                                          } else {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                  backgroundColor: Colors.red,
-                                                  content:
-                                                      Text('Login failed')),
-                                            );
+                                          if (_formLoginkey.currentState!
+                                              .validate()) {
+                                            final isAuthenticated = await login(
+                                                EmailController,
+                                                PasswordController);
+                                            if (isAuthenticated) {
+                                              Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  child: LayoutPage(),
+                                                ),
+                                              );
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                    backgroundColor:
+                                                        Colors.green,
+                                                    content: Text(
+                                                        'Login successful')),
+                                              );
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                    backgroundColor: Colors.red,
+                                                    content:
+                                                        Text('Login failed')),
+                                              );
+                                            }
                                           }
                                         },
                                         child: const PrimaryBouttom(

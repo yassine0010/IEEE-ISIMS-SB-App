@@ -13,7 +13,6 @@ Future<List<Post>?> ReadAllPosts() async {
     final response =
         await http.get(url, headers: {"Authorization": 'Basic $loginValues'});
     if (response.statusCode == 200) {
-      print("good");
       final List<dynamic> jsonResponse = jsonDecode(response.body);
       final List<Post> postList =
           jsonResponse.map((data) => Post.fromJson(data)).toList();
@@ -21,6 +20,58 @@ Future<List<Post>?> ReadAllPosts() async {
       return postList;
     }
   } on Exception catch (e) {
+    print(e);
+    return null;
+  }
+}
+
+Future<void> UploadPost(Post post) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  Map<String, dynamic> postJson = post.toJson();
+
+  String? loginValues = prefs.getString('loginValues');
+  final url = Uri.parse('http://192.168.0.113:8080/Post/Posting');
+  try {
+    final response = await http.post(url, body: jsonEncode(postJson), headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic $loginValues',
+    });
+  } catch (e) {
+    print(e);
+    return null;
+  }
+}
+
+Future<void> UpdatePost(int id, Post post) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  Map<String, dynamic> postJson = post.toJson();
+
+  String? loginValues = prefs.getString('loginValues');
+  final url = Uri.parse('http://192.168.0.113:8080/Post/Update/$id');
+  try {
+    final response = await http.put(url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic $loginValues',
+        },
+        body: jsonEncode(postJson));
+  } catch (e) {
+    print(e);
+    return null;
+  }
+}
+
+Future<void> DeletePost(int id) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  String? loginValues = prefs.getString('loginValues');
+  final url = Uri.parse('http://192.168.0.113:8080/Post/Delete/$id');
+  try {
+    final response = await http.delete(url, headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic $loginValues',
+    });
+  } catch (e) {
     print(e);
     return null;
   }

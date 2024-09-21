@@ -1,15 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
 import 'package:ieee_isims_sb/Pages/HomePages/Components/Dialog.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
+import 'package:ieee_isims_sb/models/PostModel.dart';
 import 'package:ieee_isims_sb/utils/ImagePicker.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:line_icons/line_icon.dart';
 
 class Addpostpage extends StatefulWidget {
-  const Addpostpage({super.key});
+  final int? id;
+  final Post? post;
+  final String? PopUpText;
+  Addpostpage({super.key, this.id, this.post, this.PopUpText});
 
   @override
   State<Addpostpage> createState() => _AddpostpageState();
@@ -18,7 +24,11 @@ class Addpostpage extends StatefulWidget {
 Uint8List? file;
 
 final _formPostkey = GlobalKey<FormState>();
+
 TextEditingController _dateController = TextEditingController();
+TextEditingController TitleController = TextEditingController();
+TextEditingController BodyController = TextEditingController();
+TextEditingController FormLinkController = TextEditingController();
 
 class _AddpostpageState extends State<Addpostpage> {
   Future<void> _selectDate() async {
@@ -32,6 +42,21 @@ class _AddpostpageState extends State<Addpostpage> {
       setState(() {
         _dateController.text = picked.toString().split(" ")[0];
       });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.post != null) {
+      TitleController.text = widget.post!.title ?? '';
+      FormLinkController.text = widget.post!.formLink ?? '';
+      BodyController.text = widget.post!.postContent ?? '';
+      if (widget.post!.image != null && widget.post!.image!.isNotEmpty) {
+        file = widget.post!.image;
+      } else {
+        file = null;
+      }
     }
   }
 
@@ -51,9 +76,10 @@ class _AddpostpageState extends State<Addpostpage> {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: const LineIcon.arrowLeft()),
+                    child: LineIcon.arrowLeft()),
                 Gap(s().p(context, 27)),
                 Form(
+                  autovalidateMode: AutovalidateMode.always,
                   key: _formPostkey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,8 +89,11 @@ class _AddpostpageState extends State<Addpostpage> {
                               Typographie.H5(context).copyWith(color: black)),
                       Gap(s().p(context, 8)),
                       TextFormField(
+                        controller: TitleController,
                         validator: (value) {
-                          return null;
+                          if (value!.isEmpty || value == null) {
+                            return "Please write The Title";
+                          }
                         },
                         decoration: InputDecoration(
                           filled: true,
@@ -84,9 +113,6 @@ class _AddpostpageState extends State<Addpostpage> {
                         onTap: () {
                           _selectDate();
                         },
-                        validator: (value) {
-                          return null;
-                        },
                         decoration: InputDecoration(
                           suffixIcon: const Icon(Icons.calendar_today),
                           filled: true,
@@ -101,10 +127,13 @@ class _AddpostpageState extends State<Addpostpage> {
                               Typographie.H5(context).copyWith(color: black)),
                       Gap(s().p(context, 8)),
                       TextFormField(
-                        maxLines: 6,
+                        controller: BodyController,
+                        maxLines: 8,
                         keyboardType: TextInputType.multiline,
                         validator: (value) {
-                          return null;
+                          if (value!.isEmpty || value == null) {
+                            return "Body is Empty ";
+                          }
                         },
                         decoration: InputDecoration(
                           filled: true,
@@ -119,9 +148,7 @@ class _AddpostpageState extends State<Addpostpage> {
                               Typographie.H5(context).copyWith(color: black)),
                       Gap(s().p(context, 8)),
                       TextFormField(
-                        validator: (value) {
-                          return null;
-                        },
+                        controller: FormLinkController,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: const Color.fromARGB(255, 255, 255, 255),
@@ -174,13 +201,41 @@ class _AddpostpageState extends State<Addpostpage> {
                           const Spacer(),
                           Expanded(
                               child: GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return const popup();
-                                },
-                              );
+                            onTap: () async {
+                              if (_formPostkey.currentState!.validate()) {
+                                Post newpost = Post(
+                                    formLink: FormLinkController.text.isNotEmpty
+                                        ? FormLinkController.text
+                                        : null,
+                                    image: file,
+                                    postContent: BodyController.text,
+                                    postDeadline: _dateController.text,
+                                    title: TitleController.text);
+                                if (widget.post != null) {
+                                  print(widget.PopUpText);
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return popup(
+                                        id: widget.post?.id,
+                                        PopUpText: widget.PopUpText!,
+                                        post: newpost,
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return popup(
+                                        PopUpText:
+                                            "Sure You Want To Uplod This Post?",
+                                        post: newpost,
+                                      );
+                                    },
+                                  );
+                                }
+                              }
                             },
                             child: Container(
                               height: s().p(context, 46),
@@ -189,7 +244,11 @@ class _AddpostpageState extends State<Addpostpage> {
                                       BorderRadius.circular(s().p(context, 12)),
                                   color: primary_col),
                               child: Center(
-                                child: Text("Post",
+                                child: Text(
+                                    widget.PopUpText ==
+                                            "Sure You Want To Update This Post?"
+                                        ? "Update"
+                                        : "Post",
                                     style: Typographie.ActionBouttom(context)
                                         .copyWith(color: white)),
                               ),

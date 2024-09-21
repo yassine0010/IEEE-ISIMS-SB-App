@@ -10,24 +10,24 @@ Post postFromJson(String str) => Post.fromJson(json.decode(str));
 String postToJson(Post data) => json.encode(data.toJson());
 
 class Post {
-  int id;
+  int? id;
   dynamic title;
-  String postOwner;
+  String? postOwner;
   dynamic postContent;
-  dynamic formLink;
-  Uint8List image;
-  DateTime postDate;
+  String? formLink;
+  Uint8List? image;
+  DateTime? postDate;
   dynamic postDeadline;
 
   Post({
-    required this.id,
+    this.id,
     required this.title,
-    required this.postOwner,
+    this.postOwner,
     required this.postContent,
-    required this.formLink,
-    required this.image,
-    required this.postDate,
-    required this.postDeadline,
+    this.formLink,
+    this.image,
+    this.postDate,
+    this.postDeadline,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
@@ -43,13 +43,13 @@ class Post {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "id": id ?? null,
         "title": title,
-        "postOwner": postOwner,
+        "postOwner": postOwner ?? null,
         "postContent": postContent,
-        "formLink": formLink,
-        "image": image,
-        "postDate": postDate.toIso8601String(),
-        "postDeadline": postDeadline,
+        "formLink": formLink != null ? formLink : null,
+        "image": image != null ? base64Encode(image!) : null,
+        "postDate": postDate?.toIso8601String() ?? null,
+        "postDeadline": postDeadline ?? null,
       };
 }

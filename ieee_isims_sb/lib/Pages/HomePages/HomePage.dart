@@ -147,13 +147,37 @@ class _HomepageState extends State<Homepage> {
                     FutureBuilder<List<Post>?>(
                       future: fetchPosts(),
                       builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return SliverToBoxAdapter(
+                            child: Center(
+                              child: Text("An error occurred"),
+                            ),
+                          );
+                        }
+                        if (ConnectionState.none == snapshot.connectionState) {
+                          print("object");
+                          return SliverToBoxAdapter(
+                            child: Center(
+                              child: Text("Internet Connexion Problem"),
+                            ),
+                          );
+                        }
+
+                        if (snapshot.hasData && snapshot.data!.isEmpty) {
+                          return SliverToBoxAdapter(
+                            child: Center(
+                              child: Text("No posts available"),
+                            ),
+                          );
+                        }
+
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          // Show a loading indicator while the future is loading
                           return SliverToBoxAdapter(
                             child: Center(child: CircularProgressIndicator()),
                           );
-                        } else {
+                        }
+                        if (snapshot.hasData) {
                           final postList = snapshot.data!.reversed.toList();
 
                           return SliverList.builder(
@@ -170,6 +194,13 @@ class _HomepageState extends State<Homepage> {
                               );
                             },
                           );
+                        } else {
+                          print("test");
+                          return SliverToBoxAdapter(
+                              child: Center(
+                                  child: CircularProgressIndicator(
+                            color: primary_col,
+                          )));
                         }
                       },
                     ),

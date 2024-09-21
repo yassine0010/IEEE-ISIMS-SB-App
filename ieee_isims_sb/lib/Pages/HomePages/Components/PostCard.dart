@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
+import 'package:ieee_isims_sb/Pages/HomePages/AddPostPage.dart';
+import 'package:ieee_isims_sb/Pages/HomePages/Components/Dialog.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
 import 'package:ieee_isims_sb/models/PostModel.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
@@ -17,7 +19,7 @@ class PostCard extends StatelessWidget {
     required this.post,
   });
   void _launchURL() async {
-    String url = await post.formLink;
+    String url = await post.formLink!;
     await launch(url);
   }
 
@@ -50,13 +52,13 @@ class PostCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              post.postOwner,
+                              post.postOwner!,
                               style: Typographie.H5(context)
                                   .copyWith(color: primary_col),
                             ),
                             if (post.postDate != null) ...[
                               Text(
-                                post.postDate.format('D, M j, H:i'),
+                                post.postDate!.format('D, M j, H:i'),
                                 style: TextStyle(
                                     color: black,
                                     fontSize: s().p(context, 8),
@@ -77,9 +79,35 @@ class PostCard extends StatelessWidget {
                         ),
                         if (role == "Admin") ...[
                           Spacer(),
-                          LineIcon.pen(),
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Addpostpage(
+                                        id: post.id,
+                                        post: post,
+                                        PopUpText:
+                                            "Sure You Want To Update This Post?",
+                                      ),
+                                    ));
+                              },
+                              child: LineIcon.pen()),
                           Gap(s().p(context, 8)),
-                          LineIcon.minus()
+                          GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return popup(
+                                      id: post.id,
+                                      PopUpText:
+                                          "Sure You Want To Delete This Post?",
+                                    );
+                                  },
+                                );
+                              },
+                              child: LineIcon.minus())
                         ]
                       ],
                     ),
@@ -113,7 +141,7 @@ class PostCard extends StatelessWidget {
                               child: Text(
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                post.formLink,
+                                post.formLink!,
                                 style: TextStyle(
                                     color: smc2_color,
                                     fontSize: s().p(context, 10),
@@ -126,13 +154,13 @@ class PostCard extends StatelessWidget {
                     ],
                     Gap(s().p(context, 9)),
 
-                    if (post.image.isNotEmpty) ...[
+                    if (post.image!.isNotEmpty) ...[
                       Container(
                         height: 250,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: MemoryImage(post.image))),
+                                image: MemoryImage(post.image!))),
                       )
                     ]
                   ],

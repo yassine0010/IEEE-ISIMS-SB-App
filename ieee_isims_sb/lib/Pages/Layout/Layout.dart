@@ -107,7 +107,7 @@ class _LayoutPageState extends State<LayoutPage> {
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
           initialRoute: "/",
           routes: {
-            "/AddPage": (final context) => const Addpostpage(),
+            "/AddPage": (final context) => Addpostpage(),
           },
         ),
       ),
