@@ -15,6 +15,17 @@ class SMC extends StatefulWidget {
   State<SMC> createState() => _SMCState();
 }
 
+List<String> PDates = [
+  "September 2203",
+];
+List<String> projects = [
+  "IEEE ISIMS SB APP",
+];
+
+List<String> PImagePath = [
+  "assets/images/smc/app.png",
+];
+
 class _SMCState extends State<SMC> {
   @override
   Widget build(BuildContext context) {
@@ -51,10 +62,32 @@ class _SMCState extends State<SMC> {
                     style: Typographie.NormalText(context),
                   ),
                   Gap(s().p(context, 32)),
-                  SvgPicture.asset(
-                      width: s().p(context, 357),
-                      height: s().p(context, 238),
-                      "assets/svg/Construction-cuate.svg")
+                  Text(
+                    "Projects",
+                    style: Typographie.miniTitle(context)
+                        .copyWith(color: smc2_color),
+                  ),
+                  Gap(s().p(context, 8)),
+                  SizedBox(
+                    height: s().p(context, 210),
+                    child: ListView.builder(
+                      itemCount: 1,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            EventElement(
+                              Dates: PDates,
+                              Event: projects,
+                              Path: PImagePath,
+                              index: index,
+                            ),
+                            Gap(s().p(context, 16))
+                          ],
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
