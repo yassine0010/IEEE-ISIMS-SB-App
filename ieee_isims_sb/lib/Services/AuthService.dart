@@ -44,7 +44,6 @@ Future<bool> login(
         return false;
       }
     } catch (error) {
-      print(error);
       return false;
     }
   }

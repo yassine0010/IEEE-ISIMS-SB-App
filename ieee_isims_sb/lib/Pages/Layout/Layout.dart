@@ -29,8 +29,8 @@ class _LayoutPageState extends State<LayoutPage> {
     super.initState();
     int index = 0;
 
-    if (widget.isvisitor != null && widget.isvisitor==true) {
-      index = 2;
+    if (widget.isvisitor != null && widget.isvisitor == true) {
+      index = 1;
     }
     _controller = PersistentTabController(initialIndex: index);
     _scrollController1 = ScrollController();
@@ -89,14 +89,12 @@ class _LayoutPageState extends State<LayoutPage> {
   }
 
   List<Widget> _buildScreens() {
-    print("object");
-    print(widget.isvisitor);
     return [
       Homepage(
         isvisitor: widget.isvisitor,
       ),
+      AboutUsPage(),
       Profilepage(),
-      AboutUsPage()
     ];
   }
 
@@ -128,27 +126,6 @@ class _LayoutPageState extends State<LayoutPage> {
         textStyle: Typographie.H5(context),
         inactiveColorSecondary: black,
         inactiveIcon: SvgPicture.asset(
-          "assets/svg/menu_icons/li_user.svg",
-          color: black,
-        ),
-        icon: SvgPicture.asset(
-          color: primary_col,
-          "assets/svg/menu_icons/li_user.svg",
-          height: s().p(context, 24),
-          width: s().p(context, 24),
-        ),
-        scrollController: _scrollController2,
-        activeColorPrimary: primary_col,
-        inactiveColorPrimary: black,
-        routeAndNavigatorSettings: const RouteAndNavigatorSettings(
-          initialRoute: "/",
-          routes: {},
-        ),
-      ),
-      PersistentBottomNavBarItem(
-        textStyle: Typographie.H5(context),
-        inactiveColorSecondary: black,
-        inactiveIcon: SvgPicture.asset(
           "assets/svg/menu_icons/li_about.svg",
           color: black,
         ),
@@ -166,6 +143,27 @@ class _LayoutPageState extends State<LayoutPage> {
           routes: {
             "/SB": (final context) => const SB(),
           },
+        ),
+      ),
+      PersistentBottomNavBarItem(
+        textStyle: Typographie.H5(context),
+        inactiveColorSecondary: black,
+        inactiveIcon: SvgPicture.asset(
+          "assets/svg/menu_icons/li_user.svg",
+          color: black,
+        ),
+        icon: SvgPicture.asset(
+          color: primary_col,
+          "assets/svg/menu_icons/li_user.svg",
+          height: s().p(context, 24),
+          width: s().p(context, 24),
+        ),
+        scrollController: _scrollController2,
+        activeColorPrimary: primary_col,
+        inactiveColorPrimary: black,
+        routeAndNavigatorSettings: const RouteAndNavigatorSettings(
+          initialRoute: "/",
+          routes: {},
         ),
       ),
     ];

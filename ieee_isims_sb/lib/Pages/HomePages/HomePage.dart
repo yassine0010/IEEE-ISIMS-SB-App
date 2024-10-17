@@ -166,7 +166,6 @@ class _HomepageState extends State<Homepage> {
                           }
                           if (ConnectionState.none ==
                               snapshot.connectionState) {
-                            print("object");
                             return SliverToBoxAdapter(
                               child: Center(
                                 child: Text("Internet Connexion Problem"),
@@ -206,7 +205,6 @@ class _HomepageState extends State<Homepage> {
                               },
                             );
                           } else {
-                            print("test");
                             return SliverToBoxAdapter(
                                 child: Center(
                                     child: CircularProgressIndicator(

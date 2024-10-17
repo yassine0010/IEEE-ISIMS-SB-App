@@ -18,6 +18,7 @@ List<String> WDates = [
   "November 2023",
   "January  2024",
   "February 2024",
+  "Octobre 2024"
 ];
 List<String> PDates = [
   "2023",
@@ -33,12 +34,14 @@ List<String> Workshops = [
   "Robotic  initiation",
   "All-Terrain Robots Workshop",
   "Line Follower Robots workshop",
+  "Arduino Initiation 1 & 2"
 ];
 
 List<String> WImagePath = [
   "assets/images/ras/robotic.jpg",
   "assets/images/ras/terrain.jpg",
   "assets/images/ras/line.jpg",
+  "assets/images/ras/ard12.jpg",
 ];
 List<String> PImagePath = [
   "assets/images/ras/r1.jpg",
@@ -91,7 +94,7 @@ class _RASState extends State<RAS> {
                   SizedBox(
                     height: s().p(context, 210),
                     child: ListView.builder(
-                      itemCount: 3,
+                      itemCount: Workshops.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Row(

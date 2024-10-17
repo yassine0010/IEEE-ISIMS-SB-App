@@ -18,31 +18,40 @@ List<String> WDates = [
   "December  2023",
   "December  2023",
   "February 2024",
-  "Juillet 2024"
+  "Juillet 2024",
+  "September 2024",
+  "Octobre 2024",
 ];
 List<String> EDates = [
   "Octobre 2023",
   "February 2024",
+  "Octobre 2024",
 ];
 List<String> Workshops = [
   "Pitch Perfect Online Session",
   "Leadrship session",
   "Media Bootcamp",
-  "EIPP virtual talk"
+  "EIPP virtual talk",
+  "TSYP Challenges Session",
+  "IEEEXTREME 18.0 Training Session"
 ];
 List<String> Events = [
-  "IEEEDAY",
+  "IEEEDAY 2023",
   "SB 4-th anniversary",
+  "IEEEDAY 2024",
 ];
 List<String> WImagePath = [
   "assets/images/SB/pitch_perfect.jpg",
   "assets/images/SB/leadership.jpg",
   "assets/images/SB/bootcamp.jpg",
   "assets/images/SB/EIPP.jpg",
+  "assets/images/SB/tsyp2024.jpg",
+  "assets/images/SB/xtreme18.jpg",
 ];
 List<String> EImagePath = [
   "assets/images/SB/ieeeday.jpg",
   "assets/images/SB/anniv.jpg",
+  "assets/images/SB/ieeeday2024.jpg",
 ];
 
 class _SBState extends State<SB> {
@@ -90,7 +99,7 @@ class _SBState extends State<SB> {
                   SizedBox(
                     height: s().p(context, 200),
                     child: ListView.builder(
-                      itemCount: 4,
+                      itemCount: WDates.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Row(
@@ -117,7 +126,7 @@ class _SBState extends State<SB> {
                   SizedBox(
                     height: s().p(context, 210),
                     child: ListView.builder(
-                      itemCount: 2,
+                      itemCount: EDates.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Row(

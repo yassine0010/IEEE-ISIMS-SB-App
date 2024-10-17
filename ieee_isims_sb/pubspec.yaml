@@ -28,6 +28,7 @@ dependencies:
   connectivity_plus: ^6.0.5
   provider: ^6.1.2
   date_time_format: ^2.0.1
+  photo_view: ^0.15.0
 
 dev_dependencies:
   flutter_test:

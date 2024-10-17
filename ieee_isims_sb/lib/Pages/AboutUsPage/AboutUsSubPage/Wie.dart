@@ -17,20 +17,20 @@ class wie extends StatefulWidget {
 List<String> WDates = [
   "February 2024",
 ];
-List<String> EDates = [
-  "March 2024",
-];
+List<String> EDates = ["March 2024", "September 2024"];
 List<String> Workshops = [
   "Public Speaking Session",
 ];
 List<String> Events = [
   "Tech Resolve Challenge",
+  "Boss-Up Student Business showcase"
 ];
 List<String> WImagePath = [
   "assets/images/Wie/public.jpg",
 ];
 List<String> EImagePath = [
   "assets/images/cs/trc.jpg",
+  "assets/images/Wie/bossup.jpg",
 ];
 
 class _wieState extends State<wie> {
@@ -105,7 +105,7 @@ class _wieState extends State<wie> {
                   SizedBox(
                     height: s().p(context, 210),
                     child: ListView.builder(
-                      itemCount: 1,
+                      itemCount: EImagePath.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Row(

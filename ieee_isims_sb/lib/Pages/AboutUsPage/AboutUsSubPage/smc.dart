@@ -15,6 +15,16 @@ class SMC extends StatefulWidget {
   State<SMC> createState() => _SMCState();
 }
 
+List<String> WDates = [
+  "Octobre 2024",
+];
+List<String> Workshops = [
+  "AI Bootcamp",
+];
+
+List<String> WImagePath = [
+  "assets/images/smc/ai.jpg",
+];
 List<String> PDates = [
   "September 2203",
 ];
@@ -62,6 +72,32 @@ class _SMCState extends State<SMC> {
                     style: Typographie.NormalText(context),
                   ),
                   Gap(s().p(context, 32)),
+                  Text(
+                    "Workshops",
+                    style: Typographie.miniTitle(context)
+                        .copyWith(color: smc2_color),
+                  ),
+                  Gap(s().p(context, 8)),
+                  SizedBox(
+                    height: s().p(context, 210),
+                    child: ListView.builder(
+                      itemCount: Workshops.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            EventElement(
+                              Dates: WDates,
+                              Event: Workshops,
+                              Path: WImagePath,
+                              index: index,
+                            ),
+                            Gap(s().p(context, 16))
+                          ],
+                        );
+                      },
+                    ),
+                  ),
                   Text(
                     "Projects",
                     style: Typographie.miniTitle(context)

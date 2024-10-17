@@ -212,7 +212,6 @@ class _AddpostpageState extends State<Addpostpage> {
                                     postDeadline: _dateController.text,
                                     title: TitleController.text);
                                 if (widget.post != null) {
-                                  print(widget.PopUpText);
                                   showDialog(
                                     context: context,
                                     builder: (context) {

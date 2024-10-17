@@ -23,6 +23,7 @@ List<String> EDates = [
   "November 2023",
   "February 2024",
   "March 2024",
+  "Octobre  2024",
 ];
 List<String> Workshops = [
   "CP Workshop",
@@ -33,6 +34,7 @@ List<String> Events = [
   "IEEEXtreme17.0",
   "solve it HackJam ",
   "Tech Resolve Challenge",
+  "Made In CS"
 ];
 List<String> WImagePath = [
   "assets/images/cs/cp23.jpg",
@@ -42,7 +44,8 @@ List<String> WImagePath = [
 List<String> EImagePath = [
   "assets/images/cs/xtreme.jpg",
   "assets/images/cs/solveit.jpg",
-  "assets/images/cs/trc.jpg"
+  "assets/images/cs/trc.jpg",
+  "assets/images/cs/mics.jpg"
 ];
 
 class _CSState extends State<CS> {
@@ -117,7 +120,7 @@ class _CSState extends State<CS> {
                   SizedBox(
                     height: s().p(context, 200),
                     child: ListView.builder(
-                      itemCount: 3,
+                      itemCount: EImagePath.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Row(

@@ -54,9 +54,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
     }
 
     final isAuthenticated = await login(EmailController, PasswordController);
-    print(isAuthenticated);
     if (isAuthenticated) {
-      print("authenticated");
       Navigator.pushReplacement(
         context,
         PageTransition(

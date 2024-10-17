@@ -7,7 +7,6 @@ class ProfileProvider with ChangeNotifier {
   Profile? UserProfile;
   getDetails() async {
     UserProfile = await GetUser();
-    print(UserProfile?.ieeePassword);
     isload = false;
     notifyListeners();
   }

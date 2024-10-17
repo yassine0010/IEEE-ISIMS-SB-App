@@ -18,7 +18,6 @@ Future<Profile?> GetUser() async {
       return UserProfile;
     }
   } on Exception catch (e) {
-    print(e);
     return null;
   }
 }
