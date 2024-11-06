@@ -37,6 +37,9 @@ Future<bool> login(
         },
       );
       if (response.statusCode == 200) {
+        print("ggg");
+
+        await saveUserToken();
         prefs.setString("userData", response.body);
         prefs.setBool('is_SignIn', true);
         prefs.setString('loginValues', encodedCredentials);
