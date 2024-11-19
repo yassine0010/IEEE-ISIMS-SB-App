@@ -1,12 +1,40 @@
 {
   "project_info": {
     "project_number": "713014731932",
+<<<<<<< HEAD
     "project_id": "ieee-isims-app",
     "storage_bucket": "ieee-isims-app.appspot.com"
+=======
+    "firebase_url": "https://ieee-isims-app-default-rtdb.firebaseio.com",
+    "project_id": "ieee-isims-app",
+    "storage_bucket": "ieee-isims-app.firebasestorage.app"
+>>>>>>> testing-notification-branch
   },
   "client": [
     {
       "client_info": {
+<<<<<<< HEAD
+=======
+        "mobilesdk_app_id": "1:713014731932:android:f1c2f418f0a795c08eb959",
+        "android_client_info": {
+          "package_name": "com.ieee.isimsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyzs_7WEk94Qee1F1xKpg1rkVmM2K83Os"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+>>>>>>> testing-notification-branch
         "mobilesdk_app_id": "1:713014731932:android:0d88a94ec9c12b2a8eb959",
         "android_client_info": {
           "package_name": "com.ieeeisimsapp.app"

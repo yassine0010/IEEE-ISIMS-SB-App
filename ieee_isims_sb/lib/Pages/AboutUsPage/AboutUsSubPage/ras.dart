@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
+import 'package:ieee_isims_sb/Pages/AboutUsPage/AboutUsSubPage/cs.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:line_icons/line_icon.dart';
@@ -147,10 +148,11 @@ class _RASState extends State<RAS> {
 }
 
 class EventElement extends StatelessWidget {
-  final List Dates;
-  final List Event;
-  final List Path;
+  final List<String> Dates;
+  final List<String> Event;
+  final List<String> Path;
   final int index;
+
   const EventElement({
     super.key,
     required this.index,
@@ -165,39 +167,63 @@ class EventElement extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(Dates[index]),
-        Container(
-          width: s().p(context, 180),
-          height: s().p(context, 180),
-          decoration: BoxDecoration(
-              border: Border.all(width: 0),
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage(Path[index])),
-              borderRadius: BorderRadius.circular(s().p(context, 10))),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EventDetailPage(
+                  imagePath: Path[index],
+                  eventTitle: Event[index],
+                  heroTag: 'eventImage_${Path[index]}_$index',
+                ),
+              ),
+            );
+          },
+          child: Hero(
+            tag: 'eventImage_${Path[index]}_$index',
+            child: Container(
+              width: s().p(context, 180),
+              height: s().p(context, 180),
+              decoration: BoxDecoration(
+                border: Border.all(width: 0),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(Path[index]),
+                ),
+                borderRadius: BorderRadius.circular(s().p(context, 10)),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(s().p(context, 10)),
-                        bottomLeft: Radius.circular(s().p(context, 10))),
-                    color: const Color.fromARGB(159, 0, 0, 0),
-                  ),
-                  height: s().p(context, 33),
-                  child: ClipRRect(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                      child: Center(
-                          child: Text(
-                        Event[index],
-                        style: TextStyle(
-                            fontSize: s().p(context, 11),
-                            color: white,
-                            fontWeight: FontWeight.w700),
-                      )),
+                        bottomLeft: Radius.circular(s().p(context, 10)),
+                      ),
+                      color: const Color.fromARGB(159, 0, 0, 0),
                     ),
-                  ))
-            ],
+                    height: s().p(context, 33),
+                    child: ClipRRect(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                        child: Center(
+                          child: Text(
+                            Event[index],
+                            style: TextStyle(
+                              fontSize: s().p(context, 11),
+                              color: white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ],

@@ -96,8 +96,7 @@ class popup extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                                 backgroundColor: Colors.green,
-                                content: Text(
-                                    'Post Succsesfully Uploaded, please reopen the app (bug)')),
+                                content: Text('Post Succsesfully Uploaded')),
                           );
                         }
                         Navigator.push(

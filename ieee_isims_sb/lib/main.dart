@@ -7,7 +7,11 @@ import 'package:ieee_isims_sb/Providers/ProfileProvider.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  /* WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );*/
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

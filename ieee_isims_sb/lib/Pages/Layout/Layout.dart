@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ieee_isims_sb/Colors/colors.dart';
 import 'package:ieee_isims_sb/Pages/AboutUsPage/AboutUsPage.dart';
 import 'package:ieee_isims_sb/Pages/AboutUsPage/AboutUsSubPage/SB.dart';
+import 'package:ieee_isims_sb/Pages/ContactUsPage/ContactUs.dart';
 import 'package:ieee_isims_sb/Pages/HomePages/AddPostPage.dart';
 import 'package:ieee_isims_sb/Pages/HomePages/HomePage.dart';
 import 'package:ieee_isims_sb/Pages/ProfilePage/ProfilePage.dart';
@@ -24,6 +25,8 @@ class _LayoutPageState extends State<LayoutPage> {
   late ScrollController _scrollController1;
   late ScrollController _scrollController2;
   late ScrollController _scrollController3;
+  late ScrollController _scrollController4;
+
   @override
   void initState() {
     super.initState();
@@ -37,6 +40,7 @@ class _LayoutPageState extends State<LayoutPage> {
     _scrollController2 = ScrollController();
 
     _scrollController3 = ScrollController();
+    _scrollController4 = ScrollController();
   }
 
   @override
@@ -45,6 +49,8 @@ class _LayoutPageState extends State<LayoutPage> {
     _scrollController1.dispose();
     _scrollController2.dispose();
     _scrollController3.dispose();
+    _scrollController4.dispose();
+
     super.dispose();
   }
 
@@ -94,6 +100,7 @@ class _LayoutPageState extends State<LayoutPage> {
         isvisitor: widget.isvisitor,
       ),
       AboutUsPage(),
+      Contactus(),
       Profilepage(),
     ];
   }
@@ -143,6 +150,27 @@ class _LayoutPageState extends State<LayoutPage> {
           routes: {
             "/SB": (final context) => const SB(),
           },
+        ),
+      ),
+      PersistentBottomNavBarItem(
+        textStyle: Typographie.H5(context),
+        inactiveColorSecondary: black,
+        inactiveIcon: SvgPicture.asset(
+          "assets/svg/menu_icons/li_client.svg",
+          color: black,
+        ),
+        icon: SvgPicture.asset(
+          color: primary_col,
+          "assets/svg/menu_icons/li_client.svg",
+          height: s().p(context, 24),
+          width: s().p(context, 24),
+        ),
+        scrollController: _scrollController2,
+        activeColorPrimary: primary_col,
+        inactiveColorPrimary: black,
+        routeAndNavigatorSettings: const RouteAndNavigatorSettings(
+          initialRoute: "/",
+          routes: {},
         ),
       ),
       PersistentBottomNavBarItem(
