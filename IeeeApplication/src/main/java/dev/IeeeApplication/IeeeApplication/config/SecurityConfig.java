@@ -16,12 +16,14 @@ public class SecurityConfig {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
+                                .requestMatchers("/ContactUs/Posting").permitAll()
                                 .requestMatchers("/Post/Posting", "/Update/{requestedId}", "/Delete/{requestedId}").hasRole("ADMIN")
                                 .requestMatchers("/Post/ReadAll", "/User/Read").hasAnyRole("USER", "ADMIN")
                                 .anyRequest().authenticated()
@@ -30,4 +32,6 @@ public class SecurityConfig {
                 .userDetailsService(customUserDetailsService);
         return http.build();
     }
+
+
 }

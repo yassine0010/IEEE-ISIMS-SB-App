@@ -9,29 +9,29 @@ import java.util.Date;
 @Data
 @Table(name = "ContactUs")
 public class ContactUsEntity {
-    @jakarta.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Long Id;
 
-    @Column(name = "C_Owner")
-    private String PostOwner;
+    @Column(name = "COwner")
+    private String COwner;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "C_Date")
-    private Date PostDate;
+    @Column(name = "CDate")
+    private Date CDate;
 
-    @Column(name = "C_Title")
-    private String Title;
+    @Column(name = "ctitle")
+    private String ctitle;
 
     @Lob
-    @Column(name = "C_Content", columnDefinition = "MEDIUMTEXT")
-    private String PostContent;
+    @Column(name = "ccontent", columnDefinition = "MEDIUMTEXT")
+    private String ccontent;
 
 
     @PrePersist
     protected void onCreate() {
-        this.PostDate = new Date();
+        this.CDate = new Date();
 
     }
 }
