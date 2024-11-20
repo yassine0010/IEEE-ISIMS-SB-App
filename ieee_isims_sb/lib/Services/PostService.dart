@@ -8,7 +8,7 @@ Future<List<Post>?> ReadAllPosts() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   String? loginValues = prefs.getString('loginValues');
-  final url = Uri.parse('http://192.168.1.6:8080/Post/ReadAll');
+  final url = Uri.parse('http://51.255.172.143:8080/Post/ReadAll');
   try {
     final response =
         await http.get(url, headers: {"Authorization": 'Basic $loginValues'});
@@ -30,7 +30,7 @@ Future<void> UploadPost(Post post) async {
   Map<String, dynamic> postJson = post.toJson();
 
   String? loginValues = prefs.getString('loginValues');
-  final url = Uri.parse('http://192.168.1.6:8080/Post/Posting');
+  final url = Uri.parse('http://51.255.172.143:8080/Post/Posting');
   try {
     final response = await http.post(url, body: jsonEncode(postJson), headers: {
       'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ Future<void> UpdatePost(int id, Post post) async {
   Map<String, dynamic> postJson = post.toJson();
 
   String? loginValues = prefs.getString('loginValues');
-  final url = Uri.parse('http://192.168.1.6:8080/Post/Update/$id');
+  final url = Uri.parse('http://51.255.172.143:8080/Post/Update/$id');
   try {
     final response = await http.put(url,
         headers: {
@@ -63,7 +63,7 @@ Future<void> DeletePost(int id) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   String? loginValues = prefs.getString('loginValues');
-  final url = Uri.parse('http://192.168.1.6:8080/Post/Delete/$id');
+  final url = Uri.parse('http://51.255.172.143:8080/Post/Delete/$id');
   try {
     final response = await http.delete(url, headers: {
       'Content-Type': 'application/json',

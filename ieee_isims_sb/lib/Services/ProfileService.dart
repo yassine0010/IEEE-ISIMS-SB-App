@@ -8,7 +8,7 @@ Future<Profile?> GetUser() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   String? loginValues = prefs.getString('loginValues');
-  final url = Uri.parse('http://192.168.1.6:8080/User/Read');
+  final url = Uri.parse('http://51.255.172.143:8080/User/Read');
   try {
     final response =
         await http.get(url, headers: {"Authorization": 'Basic $loginValues'});

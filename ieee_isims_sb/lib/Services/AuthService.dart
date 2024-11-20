@@ -7,7 +7,7 @@ Future<bool> login(
   TextEditingController EmailController,
   TextEditingController PasswordController,
 ) async {
-  final url = Uri.parse('http://192.168.1.6:8080/User/Read');
+  final url = Uri.parse('http://51.255.172.143:8080/User/Read');
 
   final String email = EmailController.text;
   final String password = PasswordController.text;
@@ -25,12 +25,10 @@ Future<bool> login(
       },
     );
     if (response.statusCode == 200) {
-
       return true;
     }
   } else {
     try {
-
       final response = await http.get(
         url,
         headers: {
@@ -39,7 +37,6 @@ Future<bool> login(
       );
 
       if (response.statusCode == 200) {
-
         // await saveUserToken();
         prefs.setString("userData", response.body);
         prefs.setBool('is_SignIn', true);

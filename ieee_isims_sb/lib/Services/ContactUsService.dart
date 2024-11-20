@@ -10,7 +10,7 @@ Future<bool> Uploadticket(ContactUs ticket) async {
 
   String? loginValues = prefs.getString('loginValues');
 
-  final url = Uri.parse('http://192.168.1.6:8080/ContactUs/Posting');
+  final url = Uri.parse('http://51.255.172.143:8080/ContactUs/Posting');
 
   try {
     http.Response response;
