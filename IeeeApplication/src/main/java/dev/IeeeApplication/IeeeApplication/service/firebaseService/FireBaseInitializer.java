@@ -1,4 +1,4 @@
-package dev.IeeeApplication.IeeeApplication.service.firebaseService;
+/*package dev.IeeeApplication.IeeeApplication.service.firebaseService;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -35,3 +35,4 @@ public class FireBaseInitializer {
     }
 
 }
+*/
