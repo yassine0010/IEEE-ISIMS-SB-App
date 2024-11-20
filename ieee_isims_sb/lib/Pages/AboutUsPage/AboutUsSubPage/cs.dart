@@ -200,12 +200,12 @@ class EventElement extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(10),
                         bottomLeft: Radius.circular(10),
                       ),
-                      color: const Color.fromARGB(159, 0, 0, 0),
+                      color: Color.fromARGB(159, 0, 0, 0),
                     ),
                     height: 33,
                     child: ClipRRect(
@@ -214,7 +214,7 @@ class EventElement extends StatelessWidget {
                         child: Center(
                           child: Text(
                             Event[index],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 11,
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
@@ -240,11 +240,11 @@ class EventDetailPage extends StatelessWidget {
   final String heroTag;
 
   const EventDetailPage({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.eventTitle,
     required this.heroTag,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

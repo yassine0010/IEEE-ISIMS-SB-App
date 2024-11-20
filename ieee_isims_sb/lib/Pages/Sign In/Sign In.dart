@@ -58,7 +58,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
         context,
         PageTransition(
           type: PageTransitionType.fade,
-          child: LayoutPage(
+          child: const LayoutPage(
             isvisitor: false,
           ),
         ),
@@ -76,7 +76,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: isloading
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
             : Container(
@@ -114,9 +114,10 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                     controller: EmailController,
                                     keyboardType: TextInputType.emailAddress,
                                     validator: (value) {
-                                      if (value!.isEmpty || value == null) {
+                                      if (value!.isEmpty) {
                                         return "Please write Your Email";
                                       }
+                                      return null;
                                     },
                                     decoration: InputDecoration(
                                       hintStyle:
@@ -134,9 +135,10 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                     obscureText: isobsecure,
                                     keyboardType: TextInputType.visiblePassword,
                                     validator: (value) {
-                                      if (value!.isEmpty || value == null) {
+                                      if (value!.isEmpty) {
                                         return "Please write Your Email";
                                       }
+                                      return null;
                                     },
                                     decoration: InputDecoration(
                                       suffixIcon: IconButton(
@@ -186,14 +188,14 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                                 context,
                                                 PageTransition(
                                                   type: PageTransitionType.fade,
-                                                  child: LayoutPage(
+                                                  child: const LayoutPage(
                                                     isvisitor: false,
                                                   ),
                                                 ),
                                               );
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
-                                                SnackBar(
+                                                const SnackBar(
                                                     backgroundColor:
                                                         Colors.green,
                                                     content: Text(
@@ -202,7 +204,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                             } else {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
-                                                SnackBar(
+                                                const SnackBar(
                                                     backgroundColor: Colors.red,
                                                     content:
                                                         Text('Login failed')),
@@ -230,7 +232,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                     ),
                                     Gap(s().p(context, 12)),
                                     GestureDetector(
-                                      child: SecondaryBoutton(
+                                      child: const SecondaryBoutton(
                                         message: "Continue As A Visitor",
                                       ),
                                       onTap: () async {
@@ -242,7 +244,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => LayoutPage(
+                                              builder: (context) => const LayoutPage(
                                                 isvisitor: true,
                                               ),
                                             ));

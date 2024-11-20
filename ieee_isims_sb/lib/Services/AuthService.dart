@@ -9,15 +9,15 @@ Future<bool> login(
 ) async {
   final url = Uri.parse('http://192.168.1.6:8080/User/Read');
 
-  final String _email = EmailController.text;
-  final String _password = PasswordController.text;
-  final credentials = '$_email:$_password';
+  final String email = EmailController.text;
+  final String password = PasswordController.text;
+  final credentials = '$email:$password';
   final encodedCredentials = base64Encode(utf8.encode(credentials));
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   String loginValues = prefs.getString("loginValues") ?? "";
-  bool is_SignIn = prefs.getBool("is_SignIn") ?? false;
+  bool isSignin = prefs.getBool("is_SignIn") ?? false;
 
-  if (is_SignIn == true) {
+  if (isSignin == true) {
     final response = await http.get(
       url,
       headers: {

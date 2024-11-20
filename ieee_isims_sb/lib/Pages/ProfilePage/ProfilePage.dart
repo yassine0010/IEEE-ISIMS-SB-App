@@ -36,7 +36,7 @@ class _ProfilepageState extends State<Profilepage> {
     return Scaffold(
       backgroundColor: bg_col,
       body: isload
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : SafeArea(
               child: Padding(
                   padding: EdgeInsets.all(

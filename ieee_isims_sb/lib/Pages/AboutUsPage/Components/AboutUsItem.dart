@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:ieee_isims_sb/Colors/colors.dart';
-import 'package:ieee_isims_sb/Pages/AboutUsPage/AboutUsSubPage/SB.dart';
 import 'package:ieee_isims_sb/fonts/Typographie.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:page_transition/page_transition.dart';
@@ -29,7 +27,7 @@ class AboutUsItem extends StatelessWidget {
       child: Container(
         height: s().p(context, 131),
         decoration: BoxDecoration(
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                   color: Color.fromARGB(110, 109, 109, 109),
                   spreadRadius: 1,

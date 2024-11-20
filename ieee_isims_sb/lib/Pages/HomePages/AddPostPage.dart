@@ -13,7 +13,7 @@ class Addpostpage extends StatefulWidget {
   final int? id;
   final Post? post;
   final String? PopUpText;
-  Addpostpage({super.key, this.id, this.post, this.PopUpText});
+  const Addpostpage({super.key, this.id, this.post, this.PopUpText});
 
   @override
   State<Addpostpage> createState() => _AddpostpageState();
@@ -74,7 +74,7 @@ class _AddpostpageState extends State<Addpostpage> {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: LineIcon.arrowLeft()),
+                    child: const LineIcon.arrowLeft()),
                 Gap(s().p(context, 27)),
                 Form(
                   autovalidateMode: AutovalidateMode.always,
@@ -89,9 +89,10 @@ class _AddpostpageState extends State<Addpostpage> {
                       TextFormField(
                         controller: TitleController,
                         validator: (value) {
-                          if (value!.isEmpty || value == null) {
+                          if (value!.isEmpty) {
                             return "Please write The Title";
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                           filled: true,
@@ -129,9 +130,10 @@ class _AddpostpageState extends State<Addpostpage> {
                         maxLines: 8,
                         keyboardType: TextInputType.multiline,
                         validator: (value) {
-                          if (value!.isEmpty || value == null) {
+                          if (value!.isEmpty) {
                             return "Body is Empty ";
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                           filled: true,

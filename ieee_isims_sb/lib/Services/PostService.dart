@@ -19,9 +19,10 @@ Future<List<Post>?> ReadAllPosts() async {
 
       return postList;
     }
-  } on Exception catch (e) {
+  } on Exception {
     return null;
   }
+  return null;
 }
 
 Future<void> UploadPost(Post post) async {
@@ -36,7 +37,7 @@ Future<void> UploadPost(Post post) async {
       'Authorization': 'Basic $loginValues',
     });
   } catch (e) {
-    return null;
+    return;
   }
 }
 
@@ -54,7 +55,7 @@ Future<void> UpdatePost(int id, Post post) async {
         },
         body: jsonEncode(postJson));
   } catch (e) {
-    return null;
+    return;
   }
 }
 
@@ -69,6 +70,6 @@ Future<void> DeletePost(int id) async {
       'Authorization': 'Basic $loginValues',
     });
   } catch (e) {
-    return null;
+    return;
   }
 }

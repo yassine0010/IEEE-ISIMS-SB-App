@@ -17,9 +17,9 @@ Future<bool> Uploadticket(ContactUs ticket) async {
 
     if (loginValues == null) {
       print("is testinf");
-      final String email = "test";
-      final String password = "test";
-      final credentials = '$email:$password';
+      const String email = "test";
+      const String password = "test";
+      const credentials = '$email:$password';
       final encodedCredentials = base64Encode(utf8.encode(credentials));
 
       // Make the POST request

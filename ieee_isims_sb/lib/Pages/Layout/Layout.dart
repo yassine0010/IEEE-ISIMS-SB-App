@@ -14,7 +14,7 @@ import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class LayoutPage extends StatefulWidget {
   final bool? isvisitor;
-  LayoutPage({super.key, this.isvisitor});
+  const LayoutPage({super.key, this.isvisitor});
 
   @override
   State<LayoutPage> createState() => _LayoutPageState();
@@ -99,9 +99,9 @@ class _LayoutPageState extends State<LayoutPage> {
       Homepage(
         isvisitor: widget.isvisitor,
       ),
-      AboutUsPage(),
-      Contactus(),
-      Profilepage(),
+      const AboutUsPage(),
+      const Contactus(),
+      const Profilepage(),
     ];
   }
 
@@ -125,7 +125,7 @@ class _LayoutPageState extends State<LayoutPage> {
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
           initialRoute: "/",
           routes: {
-            "/AddPage": (final context) => Addpostpage(),
+            "/AddPage": (final context) => const Addpostpage(),
           },
         ),
       ),

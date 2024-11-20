@@ -43,13 +43,13 @@ class Post {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id ?? null,
+        "id": id,
         "title": title,
-        "postOwner": postOwner ?? null,
+        "postOwner": postOwner,
         "postContent": postContent,
-        "formLink": formLink != null ? formLink : null,
+        "formLink": formLink,
         "image": image != null ? base64Encode(image!) : null,
-        "postDate": postDate?.toIso8601String() ?? null,
-        "postDeadline": postDeadline ?? null,
+        "postDate": postDate?.toIso8601String(),
+        "postDeadline": postDeadline,
       };
 }

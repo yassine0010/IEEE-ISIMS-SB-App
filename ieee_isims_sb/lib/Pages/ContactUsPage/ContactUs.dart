@@ -67,9 +67,10 @@ class _ContactusState extends State<Contactus> {
                         TextFormField(
                           controller: TitleController,
                           validator: (value) {
-                            if (value!.isEmpty || value == null) {
+                            if (value!.isEmpty) {
                               return "Please write The Title";
                             }
+                            return null;
                           },
                           decoration: InputDecoration(
                             filled: true,
@@ -88,9 +89,10 @@ class _ContactusState extends State<Contactus> {
                           maxLines: 8,
                           keyboardType: TextInputType.multiline,
                           validator: (value) {
-                            if (value!.isEmpty || value == null) {
+                            if (value!.isEmpty) {
                               return "Body is Empty ";
                             }
+                            return null;
                           },
                           decoration: InputDecoration(
                             filled: true,
@@ -151,7 +153,7 @@ class _ContactusState extends State<Contactus> {
 
 class popup extends StatelessWidget {
   final ContactUs ticket;
-  popup({
+  const popup({
     super.key,
     required this.ticket,
   });
@@ -182,7 +184,7 @@ class popup extends StatelessWidget {
                 Gap(s().p(context, 16)),
                 Row(
                   children: [
-                    Spacer(),
+                    const Spacer(),
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
@@ -214,13 +216,13 @@ class popup extends StatelessWidget {
                       onTap: () async {
                         if (await Uploadticket(ticket)) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 backgroundColor: Colors.green,
                                 content: Text('ticket Succsesfully Updated')),
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 backgroundColor:
                                     Color.fromARGB(255, 172, 36, 36),
                                 content: Text('Error')),
@@ -248,7 +250,7 @@ class popup extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Spacer()
+                    const Spacer()
                   ],
                 ),
               ],

@@ -19,7 +19,7 @@ class PostCard extends StatelessWidget {
     required this.post,
   });
   void _launchURL() async {
-    String url = await post.formLink!;
+    String url = post.formLink!;
     await launch(url);
   }
 
@@ -30,7 +30,7 @@ class PostCard extends StatelessWidget {
         Expanded(
           child: Container(
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: const Color.fromARGB(255, 255, 255, 255),
                 borderRadius:
                     BorderRadius.all(Radius.circular(s().p(context, 12)))),
             child: Padding(
@@ -78,7 +78,7 @@ class PostCard extends StatelessWidget {
                           ],
                         ),
                         if (role == "Admin") ...[
-                          Spacer(),
+                          const Spacer(),
                           GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -92,7 +92,7 @@ class PostCard extends StatelessWidget {
                                       ),
                                     ));
                               },
-                              child: LineIcon.pen()),
+                              child: const LineIcon.pen()),
                           Gap(s().p(context, 8)),
                           GestureDetector(
                               onTap: () {
@@ -107,7 +107,7 @@ class PostCard extends StatelessWidget {
                                   },
                                 );
                               },
-                              child: LineIcon.minus())
+                              child: const LineIcon.minus())
                         ]
                       ],
                     ),

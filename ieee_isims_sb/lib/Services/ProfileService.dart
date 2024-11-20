@@ -17,7 +17,8 @@ Future<Profile?> GetUser() async {
       final UserProfile = Profile.fromJson(jsonResponse);
       return UserProfile;
     }
-  } on Exception catch (e) {
+  } on Exception {
     return null;
   }
+  return null;
 }

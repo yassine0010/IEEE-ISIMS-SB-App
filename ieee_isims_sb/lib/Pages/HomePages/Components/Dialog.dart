@@ -12,7 +12,7 @@ class popup extends StatelessWidget {
   final Post? post;
   final int? id;
   final String PopUpText;
-  popup({
+  const popup({
     super.key,
     this.post,
     required this.PopUpText,
@@ -78,7 +78,7 @@ class popup extends StatelessWidget {
                         if (PopUpText == "Sure You Want To Update This Post?") {
                           await UpdatePost(id!, post!);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 backgroundColor: Colors.green,
                                 content: Text('Post Succsesfully Updated')),
                           );
@@ -86,7 +86,7 @@ class popup extends StatelessWidget {
                             "Sure You Want To Delete This Post?") {
                           await DeletePost(id!);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 backgroundColor: Colors.green,
                                 content: Text('Post Succsesfully Deleted')),
                           );
@@ -94,7 +94,7 @@ class popup extends StatelessWidget {
                         } else {
                           await UploadPost(post!);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 backgroundColor: Colors.green,
                                 content: Text('Post Succsesfully Uploaded')),
                           );
@@ -102,7 +102,7 @@ class popup extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LayoutPage(
+                                builder: (context) => const LayoutPage(
                                       isvisitor: false,
                                     )));
                       },

@@ -68,7 +68,7 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       backgroundColor: bg_col,
       body: isload
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : RefreshIndicator(
@@ -158,7 +158,7 @@ class _HomepageState extends State<Homepage> {
                         future: fetchPosts(),
                         builder: (context, snapshot) {
                           if (snapshot.hasError) {
-                            return SliverToBoxAdapter(
+                            return const SliverToBoxAdapter(
                               child: Center(
                                 child: Text("An error occurred"),
                               ),
@@ -166,7 +166,7 @@ class _HomepageState extends State<Homepage> {
                           }
                           if (ConnectionState.none ==
                               snapshot.connectionState) {
-                            return SliverToBoxAdapter(
+                            return const SliverToBoxAdapter(
                               child: Center(
                                 child: Text("Internet Connexion Problem"),
                               ),
@@ -174,7 +174,7 @@ class _HomepageState extends State<Homepage> {
                           }
 
                           if (snapshot.hasData && snapshot.data!.isEmpty) {
-                            return SliverToBoxAdapter(
+                            return const SliverToBoxAdapter(
                               child: Center(
                                 child: Text("No posts available"),
                               ),
@@ -183,7 +183,7 @@ class _HomepageState extends State<Homepage> {
 
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return SliverToBoxAdapter(
+                            return const SliverToBoxAdapter(
                               child: Center(child: CircularProgressIndicator()),
                             );
                           }

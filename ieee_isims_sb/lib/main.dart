@@ -7,16 +7,12 @@ import 'package:ieee_isims_sb/Providers/ProfileProvider.dart';
 import 'package:ieee_isims_sb/utils/ResponsiveSizeCalculator.dart';
 import 'package:provider/provider.dart';
 
-Future<void> main() async {
-  /* WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );*/
+main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -46,7 +42,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.black,
             textTheme: GoogleFonts.poppinsTextTheme()),
         debugShowCheckedModeBanner: false,
-        home: Splashscreen(),
+        home: const Splashscreen(),
       ),
     );
   }

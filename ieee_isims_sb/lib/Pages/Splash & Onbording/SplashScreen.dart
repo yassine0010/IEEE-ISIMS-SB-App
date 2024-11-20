@@ -33,12 +33,12 @@ class _SplashscreenState extends State<Splashscreen> {
           prefs.setBool('FirstTime', false);
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => GetStarted()),
+            MaterialPageRoute(builder: (context) => const GetStarted()),
           );
         } else {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => SignIn()),
+            MaterialPageRoute(builder: (context) => const SignIn()),
           );
         }
       },
